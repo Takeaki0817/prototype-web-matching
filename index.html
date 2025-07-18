@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebMatch - Web制作マッチングサービス</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://unpkg.com/heroicons@2.0.18/24/outline/index.js"></script>
+    <script src="https://unpkg.com/heroicons@2.0.18/24/solid/index.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="header-kawaii fixed top-0 left-0 right-0 z-50">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-gray-800">WebMatch</h1>
+                </div>
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="text-gray-600 hover:text-gray-800 transition-colors">特徴</a>
+                    <a href="#how-it-works" class="text-gray-600 hover:text-gray-800 transition-colors">利用の流れ</a>
+                    <a href="#pricing" class="text-gray-600 hover:text-gray-800 transition-colors">料金</a>
+                    <a href="login.html" class="btn-kawaii btn-outline-kawaii">ログイン</a>
+                    <a href="login.html" class="btn-kawaii btn-primary-kawaii">無料で始める</a>
+                </nav>
+                <!-- Mobile menu button -->
+                <button class="md:hidden p-2" id="mobile-menu-btn">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-6 pt-6 pb-6 space-y-4 bg-white border-t border-gray-200">
+                <a href="#features" class="block text-gray-600 hover:text-gray-800">特徴</a>
+                <a href="#how-it-works" class="block text-gray-600 hover:text-gray-800">利用の流れ</a>
+                <a href="#pricing" class="block text-gray-600 hover:text-gray-800">料金</a>
+                <div class="pt-4 space-y-2">
+                    <a href="login.html" class="block btn-kawaii btn-outline-kawaii w-full text-center">ログイン</a>
+                    <a href="login.html" class="block btn-kawaii btn-primary-kawaii w-full text-center">無料で始める</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-20">
+        <!-- Hero Section -->
+        <section class="main-content-kawaii py-20">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-5xl md:text-6xl font-bold text-gray-800 mb-6">
+                    Web制作を<br class="md:hidden">
+                    <span class="bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+                        もっとスマートに
+                    </span>
+                </h1>
+                <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+                    質の高いWeb制作を求める企業と、スキルを活かしたいクリエイターを繋ぐマッチングプラットフォーム。
+                    運営による品質保証で、安心・安全な取引を実現します。
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="login.html" class="btn-kawaii btn-primary-kawaii inline-flex items-center gap-2">
+                        <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                        </svg>
+                        無料で始める
+                    </a>
+                    <a href="#how-it-works" class="btn-kawaii btn-outline-kawaii inline-flex items-center gap-2">
+                        <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
+                        </svg>
+                        使い方を見る
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">WebMatchの特徴</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">3つのポイントで安心・確実なWeb制作を実現</p>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Feature 1 -->
+                    <div class="kawaii-card p-8 text-center">
+                        <div class="icon-circle-kawaii mx-auto mb-6">
+                            <svg class="heroicon-lg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">運営による品質保証</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            発注前のヒアリングと内容確認により、案件の品質を保証。
+                            経験豊富な運営チームが、要件定義から完成まで伴走します。
+                        </p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="kawaii-card p-8 text-center">
+                        <div class="icon-circle-kawaii mx-auto mb-6">
+                            <svg class="heroicon-lg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.467-.22-2.121-.659-1.172-.879-1.172-2.303 0-3.182C10.536 7.78 11.264 8 12 8c.736 0 1.467.22 2.121.659" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">安心の支払いシステム</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            仮払い制度により、発注者・受注者双方のリスクを軽減。
+                            成果物の確認後に支払いが実行される安全な取引システムです。
+                        </p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="kawaii-card p-8 text-center">
+                        <div class="icon-circle-kawaii mx-auto mb-6">
+                            <svg class="heroicon-lg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">透明な評価システム</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            双方向の評価により、信頼性の高いマッチングを実現。
+                            過去の実績や評価を確認して、最適なパートナーを見つけられます。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How it works Section -->
+        <section id="how-it-works" class="py-20 gradient-bg-light">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">利用の流れ</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">シンプルで分かりやすい4ステップ</p>
+                </div>
+
+                <!-- For Clients -->
+                <div class="mb-20">
+                    <h3 class="text-2xl font-bold text-gray-800 text-center mb-12">発注者（企業）の場合</h3>
+                    <div class="grid md:grid-cols-4 gap-8">
+                        <div class="text-center">
+                            <div class="dark-card-kawaii w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                                <span class="text-2xl font-bold text-white">1</span>
+                            </div>
+                            <h4 class="font-bold text-gray-800 mb-2">プロジェクト投稿</h4>
+                            <p class="text-sm text-gray-600">要件を詳しく記載して案件を投稿</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="dark-card-kawaii w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                                <span class="text-2xl font-bold text-white">2</span>
+                            </div>
+                            <h4 class="font-bold text-gray-800 mb-2">運営による確認</h4>
+                            <p class="text-sm text-gray-600">ヒアリングで要件を明確化</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="dark-card-kawaii w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                                <span class="text-2xl font-bold text-white">3</span>
+                            </div>
+                            <h4 class="font-bold text-gray-800 mb-2">提案の確認・選定</h4>
+                            <p class="text-sm text-gray-600">複数の提案から最適な制作者を選定</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="dark-card-kawaii w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                                <span class="text-2xl font-bold text-white">4</span>
+                            </div>
+                            <h4 class="font-bold text-gray-800 mb-2">制作・納品</h4>
+                            <p class="text-sm text-gray-600">安全な支払いシステムで取引完了</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- For Creators -->
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-800 text-center mb-12">受注者（クリエイター）の場合</h3>
+                    <div class="grid md:grid-cols-4 gap-8">
+                        <div class="text-center">
+                            <div class="kawaii-card w-16 h-16 mx-auto mb-4 flex items-center justify-center border-2 border-gray-800">
+                                <span class="text-2xl font-bold text-gray-800">1</span>
+                            </div>
+                            <h4 class="font-bold text-gray-800 mb-2">案件を探す</h4>
+                            <p class="text-sm text-gray-600">スキルに合った案件を検索・発見</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="kawaii-card w-16 h-16 mx-auto mb-4 flex items-center justify-center border-2 border-gray-800">
+                                <span class="text-2xl font-bold text-gray-800">2</span>
+                            </div>
+                            <h4 class="font-bold text-gray-800 mb-2">提案を作成</h4>
+                            <p class="text-sm text-gray-600">詳細な見積りと提案書を提出</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="kawaii-card w-16 h-16 mx-auto mb-4 flex items-center justify-center border-2 border-gray-800">
+                                <span class="text-2xl font-bold text-gray-800">3</span>
+                            </div>
+                            <h4 class="font-bold text-gray-800 mb-2">採用・契約</h4>
+                            <p class="text-sm text-gray-600">クライアントから選ばれたら契約</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="kawaii-card w-16 h-16 mx-auto mb-4 flex items-center justify-center border-2 border-gray-800">
+                                <span class="text-2xl font-bold text-gray-800">4</span>
+                            </div>
+                            <h4 class="font-bold text-gray-800 mb-2">制作・納品</h4>
+                            <p class="text-sm text-gray-600">品質の高い成果物を納品</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">料金体系</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">明確で分かりやすい料金設定</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <!-- Client Pricing -->
+                    <div class="kawaii-card p-8">
+                        <div class="text-center mb-6">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">発注者</h3>
+                            <p class="text-gray-600 mb-4">Web制作を依頼したい企業・個人</p>
+                            <div class="text-4xl font-bold text-gray-800">
+                                無料
+                                <span class="text-lg font-normal text-gray-600">/案件投稿</span>
+                            </div>
+                        </div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center gap-3">
+                                <svg class="heroicon text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                </svg>
+                                <span>案件投稿・管理</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="heroicon text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                </svg>
+                                <span>運営による品質サポート</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="heroicon text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                </svg>
+                                <span>安全な支払いシステム</span>
+                            </li>
+                        </ul>
+                        <a href="login.html" class="btn-kawaii btn-outline-kawaii w-full">発注者として登録</a>
+                    </div>
+
+                    <!-- Creator Pricing -->
+                    <div class="dark-card-kawaii p-8">
+                        <div class="text-center mb-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">受注者</h3>
+                            <p class="text-white/70 mb-4">Web制作スキルを活かしたいクリエイター</p>
+                            <div class="text-4xl font-bold text-white">
+                                10%
+                                <span class="text-lg font-normal text-white/70">/成約手数料</span>
+                            </div>
+                        </div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center gap-3">
+                                <svg class="heroicon text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                </svg>
+                                <span class="text-white">案件検索・応募</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="heroicon text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                </svg>
+                                <span class="text-white">ポートフォリオ管理</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg class="heroicon text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                </svg>
+                                <span class="text-white">確実な代金回収</span>
+                            </li>
+                        </ul>
+                        <a href="login.html" class="btn-kawaii btn-outline-kawaii w-full bg-white text-gray-800 hover:bg-gray-100">受注者として登録</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-20 gradient-bg-dark">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl font-bold text-white mb-4">今すぐ始めてみませんか？</h2>
+                <p class="text-white/80 text-xl mb-8 max-w-2xl mx-auto">
+                    WebMatchで、あなたのWeb制作プロジェクトを成功に導きましょう
+                </p>
+                <a href="login.html" class="btn-kawaii btn-outline-kawaii bg-white text-gray-800 hover:bg-gray-100 inline-flex items-center gap-2">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                    </svg>
+                    無料で始める
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">WebMatch</h3>
+                    <p class="text-gray-400 text-sm">
+                        Web制作のマッチングプラットフォーム
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">サービス</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">案件投稿</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">クリエイター検索</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">ポートフォリオ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">サポート</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">ヘルプ</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">FAQ</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">お問い合わせ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">会社情報</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">利用規約</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">プライバシーポリシー</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">運営会社</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-400 text-sm">© 2024 WebMatch. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

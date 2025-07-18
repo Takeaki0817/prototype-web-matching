@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メッセージ - WebMatch</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://unpkg.com/heroicons@2.0.18/24/outline/index.js"></script>
+    <script src="https://unpkg.com/heroicons@2.0.18/24/solid/index.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="header-kawaii fixed top-0 left-0 right-0 z-50 lg:left-80">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg hover:bg-gray-100" aria-label="メニューを開く">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+                <h1 class="text-2xl font-bold text-gray-800">メッセージ</h1>
+            </div>
+            <div class="flex items-center gap-4">
+                <button id="video-call-btn" class="btn-kawaii btn-outline-kawaii text-sm flex items-center gap-2">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z" />
+                    </svg>
+                    ビデオ通話
+                </button>
+                
+                <!-- User Profile -->
+                <div class="dropdown dropdown-end">
+                    <div tabindex="0" class="btn btn-ghost btn-circle avatar">
+                        <div class="w-10 rounded-full">
+                            <img alt="プロフィール" src="https://daisyui.com/images/stock/photo-1535713875002-d1d0cf377fde.jpg" />
+                        </div>
+                    </div>
+                    <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow-lg bg-white rounded-box w-52">
+                        <li><a href="dashboard-creator.html">ダッシュボード</a></li>
+                        <li><a href="#profile">プロフィール</a></li>
+                        <li><a href="#settings">設定</a></li>
+                        <li><a href="index.html">ログアウト</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar-kawaii fixed left-0 top-0 h-full w-80 z-40 mobile-sidebar lg:transform-none">
+        <div class="p-6">
+            <!-- Logo -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-gray-800">WebMatch</h2>
+                <p class="text-sm text-gray-500">受注者ダッシュボード</p>
+            </div>
+            
+            <!-- User Info -->
+            <div class="mb-8 p-6 bg-white rounded-3xl shadow-sm border border-gray-200">
+                <div class="flex items-center gap-4">
+                    <div class="avatar">
+                        <div class="w-14 rounded-full">
+                            <img src="https://daisyui.com/images/stock/photo-1535713875002-d1d0cf377fde.jpg" alt="プロフィール" />
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-800">田中 太郎</h3>
+                        <p class="text-sm text-gray-500">フリーランス</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Navigation -->
+            <nav class="space-y-2">
+                <a href="dashboard-creator.html" class="sidebar-item-kawaii flex items-center gap-3">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                    </svg>
+                    <span class="font-medium">ダッシュボード</span>
+                </a>
+                <a href="projects-list.html" class="sidebar-item-kawaii flex items-center gap-3">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                    </svg>
+                    <span class="font-medium">案件検索</span>
+                </a>
+                <a href="proposal-management.html" class="sidebar-item-kawaii flex items-center gap-3">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                    </svg>
+                    <span class="font-medium">提案管理</span>
+                </a>
+                <a href="#" class="sidebar-item-kawaii active flex items-center gap-3">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+                    </svg>
+                    <span class="font-medium">メッセージ</span>
+                </a>
+                <a href="notifications.html" class="sidebar-item-kawaii flex items-center gap-3">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+                    </svg>
+                    <span class="font-medium">通知</span>
+                </a>
+                <a href="review.html" class="sidebar-item-kawaii flex items-center gap-3">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                    </svg>
+                    <span class="font-medium">評価</span>
+                </a>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- Overlay for mobile -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden hidden"></div>
+
+    <!-- Main Content -->
+    <main class="main-content-kawaii lg:ml-80 pt-20">
+        <div class="grid lg:grid-cols-3 gap-6 h-[calc(100vh-6rem)]">
+            <!-- Chat List -->
+            <div class="lg:col-span-1">
+                <div class="kawaii-card h-full flex flex-col">
+                    <!-- Search -->
+                    <div class="p-4 border-b border-gray-200">
+                        <div class="relative">
+                            <input 
+                                type="text" 
+                                placeholder="メッセージを検索..."
+                                class="form-input-kawaii w-full pl-10"
+                                id="chat-search"
+                            >
+                            <svg class="heroicon absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Chat List -->
+                    <div class="flex-1 overflow-y-auto">
+                        <!-- Chat Item 1 - Active -->
+                        <div class="chat-item active p-4 border-b border-gray-100 cursor-pointer" data-chat="1">
+                            <div class="flex items-center gap-3">
+                                <div class="relative">
+                                    <div class="avatar">
+                                        <div class="w-12 rounded-full">
+                                            <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" alt="田中商事" />
+                                        </div>
+                                    </div>
+                                    <div class="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between">
+                                        <h4 class="font-medium text-gray-800 truncate">田中商事株式会社</h4>
+                                        <span class="text-xs text-gray-500">10:30</span>
+                                    </div>
+                                    <p class="text-sm text-gray-600 truncate">デザインカンプの確認ありがとうございます。修正点について...</p>
+                                    <div class="flex items-center justify-between mt-1">
+                                        <span class="text-xs text-gray-500">コーポレートサイト</span>
+                                        <span class="badge-kawaii bg-blue-100 text-blue-800 text-xs">2</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chat Item 2 -->
+                        <div class="chat-item p-4 border-b border-gray-100 cursor-pointer" data-chat="2">
+                            <div class="flex items-center gap-3">
+                                <div class="relative">
+                                    <div class="avatar">
+                                        <div class="w-12 rounded-full">
+                                            <img src="https://daisyui.com/images/stock/photo-1494790108755-2616b332c633.jpg" alt="山田物産" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between">
+                                        <h4 class="font-medium text-gray-800 truncate">山田物産</h4>
+                                        <span class="text-xs text-gray-500">昨日</span>
+                                    </div>
+                                    <p class="text-sm text-gray-600 truncate">ECサイトの件でご相談があります。お時間ある時に...</p>
+                                    <div class="flex items-center justify-between mt-1">
+                                        <span class="text-xs text-gray-500">ECサイト構築</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chat Item 3 -->
+                        <div class="chat-item p-4 border-b border-gray-100 cursor-pointer" data-chat="3">
+                            <div class="flex items-center gap-3">
+                                <div class="relative">
+                                    <div class="avatar">
+                                        <div class="w-12 rounded-full">
+                                            <img src="https://daisyui.com/images/stock/photo-1535713875002-d1d0cf377fde.jpg" alt="スタートアップA" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between">
+                                        <h4 class="font-medium text-gray-800 truncate">スタートアップA</h4>
+                                        <span class="text-xs text-gray-500">3日前</span>
+                                    </div>
+                                    <p class="text-sm text-gray-600 truncate">ランディングページの提案書を確認させていただきました</p>
+                                    <div class="flex items-center justify-between mt-1">
+                                        <span class="text-xs text-gray-500">ランディングページ</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chat Item 4 -->
+                        <div class="chat-item p-4 border-b border-gray-100 cursor-pointer" data-chat="4">
+                            <div class="flex items-center gap-3">
+                                <div class="relative">
+                                    <div class="avatar">
+                                        <div class="w-12 rounded-full">
+                                            <img src="https://daisyui.com/images/stock/photo-1472099645785-5658abf4ff4e.jpg" alt="テックカンパニーB" />
+                                        </div>
+                                    </div>
+                                    <div class="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between">
+                                        <h4 class="font-medium text-gray-800 truncate">テックカンパニーB</h4>
+                                        <span class="text-xs text-gray-500">1週間前</span>
+                                    </div>
+                                    <p class="text-sm text-gray-600 truncate">契約書の内容について問題ありません。よろしくお願いします</p>
+                                    <div class="flex items-center justify-between mt-1">
+                                        <span class="text-xs text-gray-500">Webアプリ開発</span>
+                                        <span class="badge-kawaii bg-green-100 text-green-800 text-xs">契約中</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Window -->
+            <div class="lg:col-span-2">
+                <div class="kawaii-card h-full flex flex-col">
+                    <!-- Chat Header -->
+                    <div class="p-4 border-b border-gray-200 bg-gray-50 rounded-t-lg">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="avatar">
+                                    <div class="w-10 rounded-full">
+                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" alt="田中商事" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium text-gray-800">田中商事株式会社</h3>
+                                    <p class="text-sm text-green-600">オンライン</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button class="btn-kawaii btn-outline-kawaii text-sm" onclick="shareScreen()">
+                                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
+                                    </svg>
+                                    画面共有
+                                </button>
+                                <button class="btn-kawaii btn-outline-kawaii text-sm" onclick="startVideoCall()">
+                                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z" />
+                                    </svg>
+                                    通話
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Messages -->
+                    <div class="flex-1 overflow-y-auto p-4 space-y-4" id="messages-container">
+                        <!-- Message from Client -->
+                        <div class="flex items-start gap-3">
+                            <div class="avatar">
+                                <div class="w-8 rounded-full">
+                                    <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" alt="田中商事" />
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <div class="bg-white border border-gray-200 rounded-lg p-3 max-w-xs">
+                                    <p class="text-sm text-gray-800">
+                                        こんにちは。デザインカンプを確認させていただきました。
+                                        全体的にとても良い仕上がりだと思います。
+                                    </p>
+                                </div>
+                                <div class="flex items-center gap-2 mt-1">
+                                    <span class="text-xs text-gray-500">田中商事</span>
+                                    <span class="text-xs text-gray-500">9:45</span>
+                                    <span class="text-xs text-blue-600">既読</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Message from Me -->
+                        <div class="flex items-start gap-3 justify-end">
+                            <div class="flex-1 flex justify-end">
+                                <div class="bg-gray-800 text-white rounded-lg p-3 max-w-xs">
+                                    <p class="text-sm">
+                                        ありがとうございます！いくつか修正点についてご相談があります。
+                                        特にヘッダー部分のナビゲーションについてお聞きしたいことがあります。
+                                    </p>
+                                </div>
+                                <div class="flex items-center gap-2 mt-1 ml-2">
+                                    <span class="text-xs text-gray-500">9:48</span>
+                                    <span class="text-xs text-blue-600">既読</span>
+                                </div>
+                            </div>
+                            <div class="avatar">
+                                <div class="w-8 rounded-full">
+                                    <img src="https://daisyui.com/images/stock/photo-1535713875002-d1d0cf377fde.jpg" alt="自分" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- File Message -->
+                        <div class="flex items-start gap-3">
+                            <div class="avatar">
+                                <div class="w-8 rounded-full">
+                                    <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" alt="田中商事" />
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <div class="bg-white border border-gray-200 rounded-lg p-3 max-w-xs">
+                                    <p class="text-sm text-gray-800 mb-2">
+                                        修正したいポイントをまとめました。ご確認ください。
+                                    </p>
+                                    <div class="flex items-center gap-2 p-2 bg-gray-50 rounded border">
+                                        <svg class="heroicon text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                        </svg>
+                                        <div>
+                                            <p class="text-xs font-medium text-gray-800">修正点一覧.pdf</p>
+                                            <p class="text-xs text-gray-500">1.2MB</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-2 mt-1">
+                                    <span class="text-xs text-gray-500">田中商事</span>
+                                    <span class="text-xs text-gray-500">10:15</span>
+                                    <span class="text-xs text-blue-600">既読</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- My Reply -->
+                        <div class="flex items-start gap-3 justify-end">
+                            <div class="flex-1 flex justify-end">
+                                <div class="bg-gray-800 text-white rounded-lg p-3 max-w-xs">
+                                    <p class="text-sm">
+                                        ファイルを確認しました。修正について承知いたしました。
+                                        明日の午前中には修正版をお送りできます。
+                                    </p>
+                                </div>
+                                <div class="flex items-center gap-2 mt-1 ml-2">
+                                    <span class="text-xs text-gray-500">10:30</span>
+                                    <span class="text-xs text-green-600">送信済み</span>
+                                </div>
+                            </div>
+                            <div class="avatar">
+                                <div class="w-8 rounded-full">
+                                    <img src="https://daisyui.com/images/stock/photo-1535713875002-d1d0cf377fde.jpg" alt="自分" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Typing Indicator -->
+                        <div class="flex items-start gap-3" id="typing-indicator" style="display: none;">
+                            <div class="avatar">
+                                <div class="w-8 rounded-full">
+                                    <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" alt="田中商事" />
+                                </div>
+                            </div>
+                            <div class="bg-white border border-gray-200 rounded-lg p-3">
+                                <div class="flex space-x-1">
+                                    <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                                    <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                                    <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Message Input -->
+                    <div class="p-4 border-t border-gray-200">
+                        <div class="flex items-end gap-3">
+                            <button class="btn-kawaii btn-outline-kawaii p-2" onclick="attachFile()">
+                                <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13" />
+                                </svg>
+                            </button>
+                            <div class="flex-1">
+                                <textarea 
+                                    id="message-input"
+                                    placeholder="メッセージを入力..."
+                                    class="form-input-kawaii w-full resize-none"
+                                    rows="1"
+                                    onkeydown="handleKeyDown(event)"
+                                ></textarea>
+                            </div>
+                            <button class="btn-kawaii btn-primary-kawaii" onclick="sendMessage()">
+                                <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Mobile sidebar toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('hidden');
+        });
+        
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            overlay.classList.add('hidden');
+        });
+
+        // Chat item selection
+        document.querySelectorAll('.chat-item').forEach(item => {
+            item.addEventListener('click', () => {
+                // Remove active class from all items
+                document.querySelectorAll('.chat-item').forEach(i => i.classList.remove('active'));
+                
+                // Add active class to clicked item
+                item.classList.add('active');
+                
+                // Load chat messages (demo)
+                const chatId = item.dataset.chat;
+                console.log('Loading chat:', chatId);
+            });
+        });
+
+        // Send message
+        function sendMessage() {
+            const input = document.getElementById('message-input');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Add message to chat
+            addMessage(message, 'sent');
+            
+            // Clear input
+            input.value = '';
+            
+            // Show typing indicator
+            showTypingIndicator();
+            
+            // Simulate reply after 2 seconds
+            setTimeout(() => {
+                hideTypingIndicator();
+                addMessage('承知いたしました。ありがとうございます。', 'received');
+            }, 2000);
+        }
+
+        // Handle Enter key
+        function handleKeyDown(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendMessage();
+            }
+        }
+
+        // Add message to chat
+        function addMessage(text, type) {
+            const container = document.getElementById('messages-container');
+            const messageDiv = document.createElement('div');
+            const now = new Date();
+            const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+            
+            if (type === 'sent') {
+                messageDiv.innerHTML = `
+                    <div class="flex items-start gap-3 justify-end">
+                        <div class="flex-1 flex justify-end">
+                            <div class="bg-gray-800 text-white rounded-lg p-3 max-w-xs">
+                                <p class="text-sm">${text}</p>
+                            </div>
+                            <div class="flex items-center gap-2 mt-1 ml-2">
+                                <span class="text-xs text-gray-500">${timeStr}</span>
+                                <span class="text-xs text-green-600">送信済み</span>
+                            </div>
+                        </div>
+                        <div class="avatar">
+                            <div class="w-8 rounded-full">
+                                <img src="https://daisyui.com/images/stock/photo-1535713875002-d1d0cf377fde.jpg" alt="自分" />
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                messageDiv.innerHTML = `
+                    <div class="flex items-start gap-3">
+                        <div class="avatar">
+                            <div class="w-8 rounded-full">
+                                <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" alt="田中商事" />
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="bg-white border border-gray-200 rounded-lg p-3 max-w-xs">
+                                <p class="text-sm text-gray-800">${text}</p>
+                            </div>
+                            <div class="flex items-center gap-2 mt-1">
+                                <span class="text-xs text-gray-500">田中商事</span>
+                                <span class="text-xs text-gray-500">${timeStr}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Remove typing indicator if exists
+            const typingIndicator = document.getElementById('typing-indicator');
+            if (typingIndicator.style.display !== 'none') {
+                typingIndicator.style.display = 'none';
+            }
+            
+            container.appendChild(messageDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // Show typing indicator
+        function showTypingIndicator() {
+            const indicator = document.getElementById('typing-indicator');
+            indicator.style.display = 'flex';
+            
+            const container = document.getElementById('messages-container');
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // Hide typing indicator
+        function hideTypingIndicator() {
+            const indicator = document.getElementById('typing-indicator');
+            indicator.style.display = 'none';
+        }
+
+        // Attach file
+        function attachFile() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.multiple = true;
+            input.accept = '.pdf,.doc,.docx,.jpg,.png,.gif';
+            
+            input.onchange = function(e) {
+                const files = Array.from(e.target.files);
+                files.forEach(file => {
+                    console.log('File selected:', file.name);
+                    // Demo: Add file message
+                    addFileMessage(file.name, file.size);
+                });
+            };
+            
+            input.click();
+        }
+
+        // Add file message
+        function addFileMessage(fileName, fileSize) {
+            const container = document.getElementById('messages-container');
+            const messageDiv = document.createElement('div');
+            const now = new Date();
+            const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+            const fileSizeStr = (fileSize / 1024 / 1024).toFixed(1) + 'MB';
+            
+            messageDiv.innerHTML = `
+                <div class="flex items-start gap-3 justify-end">
+                    <div class="flex-1 flex justify-end">
+                        <div class="bg-gray-800 text-white rounded-lg p-3 max-w-xs">
+                            <div class="flex items-center gap-2 p-2 bg-gray-700 rounded">
+                                <svg class="heroicon text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13" />
+                                </svg>
+                                <div>
+                                    <p class="text-xs font-medium text-white">${fileName}</p>
+                                    <p class="text-xs text-gray-300">${fileSizeStr}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 mt-1 ml-2">
+                            <span class="text-xs text-gray-500">${timeStr}</span>
+                            <span class="text-xs text-green-600">送信済み</span>
+                        </div>
+                    </div>
+                    <div class="avatar">
+                        <div class="w-8 rounded-full">
+                            <img src="https://daisyui.com/images/stock/photo-1535713875002-d1d0cf377fde.jpg" alt="自分" />
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            container.appendChild(messageDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // Video call
+        function startVideoCall() {
+            alert('ビデオ通話を開始します（デモ）');
+        }
+
+        // Screen share
+        function shareScreen() {
+            alert('画面共有を開始します（デモ）');
+        }
+
+        // Chat item styling
+        const style = document.createElement('style');
+        style.textContent = `
+            .chat-item {
+                transition: all 0.3s ease;
+            }
+            
+            .chat-item:hover {
+                background: #f8f9fa;
+            }
+            
+            .chat-item.active {
+                background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 100%);
+                border-left: 4px solid #1a1a1a;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Auto-scroll to bottom
+        const messagesContainer = document.getElementById('messages-container');
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    </script>
+</body>
+</html>

@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>通知センター - WebMatch</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://unpkg.com/heroicons@2.0.18/24/outline/index.js"></script>
+    <script src="https://unpkg.com/heroicons@2.0.18/24/solid/index.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="header-kawaii fixed top-0 left-0 right-0 z-50 lg:left-80">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg hover:bg-gray-100" aria-label="メニューを開く">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+                <h1 class="text-2xl font-bold text-gray-800">通知センター</h1>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="btn-kawaii btn-outline-kawaii text-sm" onclick="markAllAsRead()">
+                    すべて既読にする
+                </button>
+                
+                <!-- User Profile -->
+                <div class="dropdown dropdown-end">
+                    <div tabindex="0" class="btn btn-ghost btn-circle avatar">
+                        <div class="w-10 rounded-full">
+                            <img alt="プロフィール" src="https://daisyui.com/images/stock/photo-1535713875002-d1d0cf377fde.jpg" />
+                        </div>
+                    </div>
+                    <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow-lg bg-white rounded-box w-52">
+                        <li><a href="dashboard-creator.html">ダッシュボード</a></li>
+                        <li><a href="#profile">プロフィール</a></li>
+                        <li><a href="#settings">設定</a></li>
+                        <li><a href="index.html">ログアウト</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar-kawaii fixed left-0 top-0 h-full w-80 z-40 mobile-sidebar lg:transform-none">
+        <div class="p-6">
+            <!-- Logo -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-gray-800">WebMatch</h2>
+                <p class="text-sm text-gray-500">受注者ダッシュボード</p>
+            </div>
+            
+            <!-- User Info -->
+            <div class="mb-8 p-6 bg-white rounded-3xl shadow-sm border border-gray-200">
+                <div class="flex items-center gap-4">
+                    <div class="avatar">
+                        <div class="w-14 rounded-full">
+                            <img src="https://daisyui.com/images/stock/photo-1535713875002-d1d0cf377fde.jpg" alt="プロフィール" />
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-800">田中 太郎</h3>
+                        <p class="text-sm text-gray-500">フリーランス</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Navigation -->
+            <nav class="space-y-2">
+                <a href="dashboard-creator.html" class="sidebar-item-kawaii flex items-center gap-3">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                    </svg>
+                    <span class="font-medium">ダッシュボード</span>
+                </a>
+                <a href="projects-list.html" class="sidebar-item-kawaii flex items-center gap-3">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                    </svg>
+                    <span class="font-medium">案件検索</span>
+                </a>
+                <a href="proposal-management.html" class="sidebar-item-kawaii flex items-center gap-3">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                    </svg>
+                    <span class="font-medium">提案管理</span>
+                </a>
+                <a href="chat.html" class="sidebar-item-kawaii flex items-center gap-3">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+                    </svg>
+                    <span class="font-medium">メッセージ</span>
+                </a>
+                <a href="#" class="sidebar-item-kawaii active flex items-center gap-3">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+                    </svg>
+                    <span class="font-medium">通知</span>
+                </a>
+                <a href="review.html" class="sidebar-item-kawaii flex items-center gap-3">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                    </svg>
+                    <span class="font-medium">評価</span>
+                </a>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- Overlay for mobile -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden hidden"></div>
+
+    <!-- Main Content -->
+    <main class="main-content-kawaii lg:ml-80 pt-20">
+        <!-- Notification Stats -->
+        <div class="grid md:grid-cols-4 gap-6 mb-8">
+            <div class="kawaii-card p-6 text-center">
+                <div class="stat-number text-red-600">5</div>
+                <div class="stat-label">未読</div>
+            </div>
+            <div class="kawaii-card p-6 text-center">
+                <div class="stat-number text-blue-600">8</div>
+                <div class="stat-label">今日</div>
+            </div>
+            <div class="kawaii-card p-6 text-center">
+                <div class="stat-number text-green-600">3</div>
+                <div class="stat-label">重要</div>
+            </div>
+            <div class="kawaii-card p-6 text-center">
+                <div class="stat-number text-gray-600">23</div>
+                <div class="stat-label">総数（7日間）</div>
+            </div>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="mb-8">
+            <div class="kawaii-card p-6">
+                <div class="flex flex-wrap gap-2">
+                    <button class="notification-tab active" data-filter="all">
+                        すべて (23)
+                    </button>
+                    <button class="notification-tab" data-filter="unread">
+                        未読 (5)
+                    </button>
+                    <button class="notification-tab" data-filter="message">
+                        メッセージ (8)
+                    </button>
+                    <button class="notification-tab" data-filter="proposal">
+                        提案関連 (7)
+                    </button>
+                    <button class="notification-tab" data-filter="system">
+                        システム (4)
+                    </button>
+                    <button class="notification-tab" data-filter="reminder">
+                        リマインダー (4)
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notifications List -->
+        <div class="space-y-4">
+            <!-- Today -->
+            <div class="text-sm font-medium text-gray-500 px-2">今日</div>
+
+            <!-- Notification 1 - Unread Message -->
+            <div class="kawaii-card notification-item unread" data-type="message" onclick="markAsRead(this)">
+                <div class="p-4 flex items-start gap-4">
+                    <div class="flex-shrink-0">
+                        <div class="relative">
+                            <div class="icon-circle-kawaii bg-blue-100">
+                                <svg class="heroicon text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+                                </svg>
+                            </div>
+                            <div class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>
+                        </div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center justify-between mb-1">
+                            <h4 class="font-medium text-gray-800">新しいメッセージ</h4>
+                            <span class="text-xs text-gray-500">2分前</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-2">
+                            田中商事株式会社からメッセージが届きました: 「デザインカンプの確認ありがとうございます。修正点について...」
+                        </p>
+                        <div class="flex items-center gap-2">
+                            <span class="badge-kawaii bg-blue-100 text-blue-800 text-xs">メッセージ</span>
+                            <span class="text-xs text-gray-500">コーポレートサイト案件</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notification 2 - Proposal Accepted -->
+            <div class="kawaii-card notification-item unread" data-type="proposal" onclick="markAsRead(this)">
+                <div class="p-4 flex items-start gap-4">
+                    <div class="flex-shrink-0">
+                        <div class="relative">
+                            <div class="icon-circle-kawaii bg-green-100">
+                                <svg class="heroicon text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <div class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>
+                        </div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center justify-between mb-1">
+                            <h4 class="font-medium text-gray-800">提案が採用されました！</h4>
+                            <span class="text-xs text-gray-500">30分前</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-2">
+                            テックカンパニーBの「Webアプリケーション開発」案件で提案が採用されました。契約手続きに進んでください。
+                        </p>
+                        <div class="flex items-center gap-2">
+                            <span class="badge-kawaii bg-green-100 text-green-800 text-xs">提案採用</span>
+                            <span class="text-xs text-gray-500">契約金額: ¥2,800,000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notification 3 - Payment Received -->
+            <div class="kawaii-card notification-item unread" data-type="system" onclick="markAsRead(this)">
+                <div class="p-4 flex items-start gap-4">
+                    <div class="flex-shrink-0">
+                        <div class="relative">
+                            <div class="icon-circle-kawaii bg-yellow-100">
+                                <svg class="heroicon text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.467-.22-2.121-.659-1.172-.879-1.172-2.303 0-3.182C10.536 7.78 11.264 8 12 8c.736 0 1.467.22 2.121.659" />
+                                </svg>
+                            </div>
+                            <div class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>
+                        </div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center justify-between mb-1">
+                            <h4 class="font-medium text-gray-800">入金が完了しました</h4>
+                            <span class="text-xs text-gray-500">1時間前</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-2">
+                            WordPress サイト構築の案件で最終支払い（¥450,000）の入金が確認されました。
+                        </p>
+                        <div class="flex items-center gap-2">
+                            <span class="badge-kawaii bg-yellow-100 text-yellow-800 text-xs">入金完了</span>
+                            <span class="text-xs text-gray-500">取引完了</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notification 4 - Deadline Reminder -->
+            <div class="kawaii-card notification-item unread" data-type="reminder" onclick="markAsRead(this)">
+                <div class="p-4 flex items-start gap-4">
+                    <div class="flex-shrink-0">
+                        <div class="relative">
+                            <div class="icon-circle-kawaii bg-red-100">
+                                <svg class="heroicon text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0-10.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.249-8.25-3.286zm0 13.036h.008v.008H12v-.008z" />
+                                </svg>
+                            </div>
+                            <div class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>
+                        </div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center justify-between mb-1">
+                            <h4 class="font-medium text-gray-800">納期リマインダー</h4>
+                            <span class="text-xs text-gray-500">2時間前</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-2">
+                            コーポレートサイトリニューアルの納期まであと3日です。進捗状況をご確認ください。
+                        </p>
+                        <div class="flex items-center gap-2">
+                            <span class="badge-kawaii bg-red-100 text-red-800 text-xs">リマインダー</span>
+                            <span class="text-xs text-gray-500">納期: 2024/08/25</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notification 5 - New Project -->
+            <div class="kawaii-card notification-item unread" data-type="system" onclick="markAsRead(this)">
+                <div class="p-4 flex items-start gap-4">
+                    <div class="flex-shrink-0">
+                        <div class="relative">
+                            <div class="icon-circle-kawaii bg-purple-100">
+                                <svg class="heroicon text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                </svg>
+                            </div>
+                            <div class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>
+                        </div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center justify-between mb-1">
+                            <h4 class="font-medium text-gray-800">新しい案件が投稿されました</h4>
+                            <span class="text-xs text-gray-500">3時間前</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-2">
+                            あなたのスキルに合った新しい案件「モバイルアプリ向けWeb API開発」が投稿されました。
+                        </p>
+                        <div class="flex items-center gap-2">
+                            <span class="badge-kawaii bg-purple-100 text-purple-800 text-xs">新着案件</span>
+                            <span class="text-xs text-gray-500">予算: ¥800K - ¥1.5M</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Yesterday -->
+            <div class="text-sm font-medium text-gray-500 px-2 mt-8">昨日</div>
+
+            <!-- Notification 6 - Read -->
+            <div class="kawaii-card notification-item read" data-type="message" onclick="markAsRead(this)">
+                <div class="p-4 flex items-start gap-4">
+                    <div class="flex-shrink-0">
+                        <div class="icon-circle-kawaii bg-gray-100">
+                            <svg class="heroicon text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center justify-between mb-1">
+                            <h4 class="font-medium text-gray-600">メッセージ</h4>
+                            <span class="text-xs text-gray-500">昨日 18:30</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-2">
+                            山田物産からメッセージ: 「ECサイトの件でご相談があります。お時間ある時に...」
+                        </p>
+                        <div class="flex items-center gap-2">
+                            <span class="badge-kawaii bg-gray-100 text-gray-600 text-xs">メッセージ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notification 7 - System Update -->
+            <div class="kawaii-card notification-item read" data-type="system" onclick="markAsRead(this)">
+                <div class="p-4 flex items-start gap-4">
+                    <div class="flex-shrink-0">
+                        <div class="icon-circle-kawaii bg-gray-100">
+                            <svg class="heroicon text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center justify-between mb-1">
+                            <h4 class="font-medium text-gray-600">システムアップデート</h4>
+                            <span class="text-xs text-gray-500">昨日 14:00</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-2">
+                            WebMatchのシステムアップデートが完了しました。新機能「プロジェクト進捗管理」が追加されました。
+                        </p>
+                        <div class="flex items-center gap-2">
+                            <span class="badge-kawaii bg-gray-100 text-gray-600 text-xs">システム</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notification 8 - Review Request -->
+            <div class="kawaii-card notification-item read" data-type="proposal" onclick="markAsRead(this)">
+                <div class="p-4 flex items-start gap-4">
+                    <div class="flex-shrink-0">
+                        <div class="icon-circle-kawaii bg-gray-100">
+                            <svg class="heroicon text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center justify-between mb-1">
+                            <h4 class="font-medium text-gray-600">評価依頼</h4>
+                            <span class="text-xs text-gray-500">昨日 10:15</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-2">
+                            中小企業Cから「WordPress サイト構築」案件の評価依頼が届いています。
+                        </p>
+                        <div class="flex items-center gap-2">
+                            <span class="badge-kawaii bg-gray-100 text-gray-600 text-xs">評価依頼</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Load More -->
+        <div class="text-center mt-8">
+            <button class="btn-kawaii btn-outline-kawaii">
+                さらに読み込む
+            </button>
+        </div>
+    </main>
+
+    <script>
+        // Mobile sidebar toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('hidden');
+        });
+        
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            overlay.classList.add('hidden');
+        });
+
+        // Tab filtering
+        document.querySelectorAll('.notification-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs
+                document.querySelectorAll('.notification-tab').forEach(t => t.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Filter notifications
+                const filter = tab.dataset.filter;
+                const notifications = document.querySelectorAll('.notification-item');
+                
+                notifications.forEach(notification => {
+                    const type = notification.dataset.type;
+                    const isUnread = notification.classList.contains('unread');
+                    
+                    let show = false;
+                    
+                    switch(filter) {
+                        case 'all':
+                            show = true;
+                            break;
+                        case 'unread':
+                            show = isUnread;
+                            break;
+                        default:
+                            show = type === filter;
+                    }
+                    
+                    notification.style.display = show ? 'block' : 'none';
+                });
+            });
+        });
+
+        // Mark as read
+        function markAsRead(element) {
+            if (element.classList.contains('unread')) {
+                element.classList.remove('unread');
+                element.classList.add('read');
+                
+                // Update unread indicator
+                const indicator = element.querySelector('.bg-red-500');
+                if (indicator) {
+                    indicator.remove();
+                }
+                
+                // Update text colors to indicate read status
+                const title = element.querySelector('h4');
+                const content = element.querySelector('p');
+                const icon = element.querySelector('.icon-circle-kawaii');
+                
+                if (title) title.classList.replace('text-gray-800', 'text-gray-600');
+                if (content) content.classList.replace('text-gray-600', 'text-gray-500');
+                if (icon) icon.classList.replace('bg-blue-100', 'bg-gray-100');
+                
+                // Update stats (demo)
+                updateUnreadCount();
+            }
+        }
+
+        // Mark all as read
+        function markAllAsRead() {
+            const unreadNotifications = document.querySelectorAll('.notification-item.unread');
+            
+            unreadNotifications.forEach(notification => {
+                markAsRead(notification);
+            });
+            
+            alert('すべての通知を既読にしました');
+        }
+
+        // Update unread count
+        function updateUnreadCount() {
+            const unreadCount = document.querySelectorAll('.notification-item.unread').length;
+            
+            // Update stats card
+            const unreadStat = document.querySelector('.stat-number.text-red-600');
+            if (unreadStat) {
+                unreadStat.textContent = unreadCount;
+            }
+            
+            // Update tab count
+            const unreadTab = document.querySelector('[data-filter="unread"]');
+            if (unreadTab) {
+                unreadTab.textContent = `未読 (${unreadCount})`;
+            }
+        }
+
+        // Notification item styling
+        const style = document.createElement('style');
+        style.textContent = `
+            .notification-tab {
+                padding: 8px 16px;
+                border-radius: 20px;
+                border: 1px solid #e0e0e0;
+                background: white;
+                color: #666;
+                font-size: 14px;
+                font-weight: 500;
+                transition: all 0.3s ease;
+                cursor: pointer;
+            }
+            
+            .notification-tab:hover {
+                background: #f5f5f5;
+                border-color: #ccc;
+            }
+            
+            .notification-tab.active {
+                background: linear-gradient(135deg, #1a1a1a 0%, #333333 100%);
+                color: white;
+                border-color: #1a1a1a;
+            }
+            
+            .notification-item {
+                transition: all 0.3s ease;
+                cursor: pointer;
+            }
+            
+            .notification-item:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            }
+            
+            .notification-item.unread {
+                border-left: 4px solid #3b82f6;
+            }
+            
+            .notification-item.read {
+                opacity: 0.7;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

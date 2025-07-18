@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>案件詳細 - WebMatch</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://unpkg.com/heroicons@2.0.18/24/outline/index.js"></script>
+    <script src="https://unpkg.com/heroicons@2.0.18/24/solid/index.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="header-kawaii fixed top-0 left-0 right-0 z-50 lg:left-80">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg hover:bg-gray-100" aria-label="メニューを開く">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-800">案件詳細</h1>
+                    <p class="text-sm text-gray-500">ID: #PRJ-2024-001</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="btn-kawaii btn-outline-kawaii text-sm" onclick="history.back()">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                    </svg>
+                    戻る
+                </button>
+                
+                <!-- User Profile -->
+                <div class="dropdown dropdown-end">
+                    <div tabindex="0" class="btn btn-ghost btn-circle avatar">
+                        <div class="w-10 rounded-full">
+                            <img alt="プロフィール" src="https://daisyui.com/images/stock/photo-1535713875002-d1d0cf377fde.jpg" />
+                        </div>
+                    </div>
+                    <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow-lg bg-white rounded-box w-52">
+                        <li><a href="dashboard-creator.html">ダッシュボード</a></li>
+                        <li><a href="#profile">プロフィール</a></li>
+                        <li><a href="#settings">設定</a></li>
+                        <li><a href="index.html">ログアウト</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar-kawaii fixed left-0 top-0 h-full w-80 z-40 mobile-sidebar lg:transform-none">
+        <div class="p-6">
+            <!-- Logo -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-gray-800">WebMatch</h2>
+                <p class="text-sm text-gray-500">受注者ダッシュボード</p>
+            </div>
+            
+            <!-- User Info -->
+            <div class="mb-8 p-6 bg-white rounded-3xl shadow-sm border border-gray-200">
+                <div class="flex items-center gap-4">
+                    <div class="avatar">
+                        <div class="w-14 rounded-full">
+                            <img src="https://daisyui.com/images/stock/photo-1535713875002-d1d0cf377fde.jpg" alt="プロフィール" />
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-800">田中 太郎</h3>
+                        <p class="text-sm text-gray-500">フリーランス</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Navigation -->
+            <nav class="space-y-2">
+                <a href="dashboard-creator.html" class="sidebar-item-kawaii flex items-center gap-3">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                    </svg>
+                    <span class="font-medium">ダッシュボード</span>
+                </a>
+                <a href="projects-list.html" class="sidebar-item-kawaii active flex items-center gap-3">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                    </svg>
+                    <span class="font-medium">案件検索</span>
+                </a>
+                <a href="proposal-management.html" class="sidebar-item-kawaii flex items-center gap-3">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                    </svg>
+                    <span class="font-medium">提案管理</span>
+                </a>
+                <a href="chat.html" class="sidebar-item-kawaii flex items-center gap-3">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+                    </svg>
+                    <span class="font-medium">メッセージ</span>
+                </a>
+                <a href="notifications.html" class="sidebar-item-kawaii flex items-center gap-3">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+                    </svg>
+                    <span class="font-medium">通知</span>
+                </a>
+                <a href="review.html" class="sidebar-item-kawaii flex items-center gap-3">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                    </svg>
+                    <span class="font-medium">評価</span>
+                </a>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- Overlay for mobile -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden hidden"></div>
+
+    <!-- Proposal CTA (Fixed) -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <button class="btn-kawaii btn-primary-kawaii shadow-lg" onclick="createProposal()">
+            <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+            提案を作成
+        </button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content-kawaii lg:ml-80 pt-20 pb-20">
+        <!-- Project Header -->
+        <div class="mb-8">
+            <div class="kawaii-card p-6">
+                <div class="flex flex-col lg:flex-row justify-between gap-6">
+                    <div class="flex-1">
+                        <div class="flex items-center gap-3 mb-4">
+                            <h1 class="text-3xl font-bold text-gray-800">コーポレートサイトのリニューアル</h1>
+                            <span class="badge-kawaii bg-blue-100 text-blue-800">急募</span>
+                            <span class="badge-kawaii bg-green-100 text-green-800">募集中</span>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-3 gap-4 text-sm">
+                            <div>
+                                <span class="text-gray-500">投稿日:</span>
+                                <span class="font-medium ml-2">2024年7月18日</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500">応募数:</span>
+                                <span class="font-medium ml-2">12件</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500">閲覧数:</span>
+                                <span class="font-medium ml-2">156回</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center lg:text-right">
+                        <p class="text-3xl font-bold text-gray-800 mb-1">¥500K - ¥1M</p>
+                        <p class="text-sm text-gray-600 mb-3">予算範囲</p>
+                        <div class="space-y-1 text-sm text-gray-600">
+                            <div class="flex lg:justify-end items-center gap-1">
+                                <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5a2.25 2.25 0 002.25-2.25m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5a2.25 2.25 0 012.25 2.25v7.5" />
+                                </svg>
+                                <span>応募締切: 2024年8月15日</span>
+                            </div>
+                            <div class="flex lg:justify-end items-center gap-1">
+                                <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span>納期: 2024年8月31日</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-8">
+            <!-- Main Content -->
+            <div class="lg:col-span-2 space-y-8">
+                <!-- Project Description -->
+                <div class="kawaii-card p-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">プロジェクト概要</h2>
+                    <div class="prose prose-gray max-w-none">
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            弊社では創業20周年を機に、コーポレートサイトの全面リニューアルを検討しております。
+                            現在のサイトは5年前に制作したもので、デザインの古さや機能面での制約が課題となっています。
+                        </p>
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            今回のリニューアルでは、以下の点を重視しています：
+                        </p>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2 mb-4">
+                            <li>モダンで洗練されたデザイン</li>
+                            <li>レスポンシブ対応（スマートフォン・タブレット）</li>
+                            <li>SEO対策の強化</li>
+                            <li>CMS導入による更新性の向上</li>
+                            <li>表示速度の最適化</li>
+                        </ul>
+                        <p class="text-gray-700 leading-relaxed">
+                            React.jsを使用したモダンな技術スタックでの実装を希望しており、
+                            長期的な保守性も考慮した設計をお願いしたいと考えています。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Required Skills -->
+                <div class="kawaii-card p-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">必要スキル・技術要件</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <h3 class="font-medium text-gray-800 mb-2">必須スキル</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="badge-kawaii bg-blue-100 text-blue-800">React.js</span>
+                                <span class="badge-kawaii bg-green-100 text-green-800">WordPress</span>
+                                <span class="badge-kawaii bg-purple-100 text-purple-800">UI/UXデザイン</span>
+                                <span class="badge-kawaii bg-orange-100 text-orange-800">SEO</span>
+                                <span class="badge-kawaii bg-red-100 text-red-800">レスポンシブデザイン</span>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="font-medium text-gray-800 mb-2">歓迎スキル</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="badge-kawaii bg-gray-100 text-gray-800">Next.js</span>
+                                <span class="badge-kawaii bg-gray-100 text-gray-800">Figma</span>
+                                <span class="badge-kawaii bg-gray-100 text-gray-800">GA4</span>
+                                <span class="badge-kawaii bg-gray-100 text-gray-800">AWS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Deliverables -->
+                <div class="kawaii-card p-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">成果物・納期</h2>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-blue-500 pl-4">
+                            <h3 class="font-medium text-gray-800">Phase 1: デザイン・設計 (2週間)</h3>
+                            <ul class="text-sm text-gray-600 mt-1">
+                                <li>• ワイヤーフレーム</li>
+                                <li>• デザインカンプ (PC/SP)</li>
+                                <li>• 技術仕様書</li>
+                            </ul>
+                        </div>
+                        <div class="border-l-4 border-green-500 pl-4">
+                            <h3 class="font-medium text-gray-800">Phase 2: 実装・開発 (4週間)</h3>
+                            <ul class="text-sm text-gray-600 mt-1">
+                                <li>• フロントエンド実装</li>
+                                <li>• CMS構築</li>
+                                <li>• SEO対策実装</li>
+                            </ul>
+                        </div>
+                        <div class="border-l-4 border-purple-500 pl-4">
+                            <h3 class="font-medium text-gray-800">Phase 3: テスト・リリース (1週間)</h3>
+                            <ul class="text-sm text-gray-600 mt-1">
+                                <li>• 動作テスト</li>
+                                <li>• 本番環境構築</li>
+                                <li>• 運用マニュアル</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reference Materials -->
+                <div class="kawaii-card p-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">参考資料・サイト</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <h3 class="font-medium text-gray-800 mb-2">参考サイト</h3>
+                            <ul class="space-y-2 text-sm">
+                                <li class="flex items-center gap-2">
+                                    <svg class="heroicon text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
+                                    </svg>
+                                    <a href="#" class="text-blue-600 hover:text-blue-800">https://example-corp1.com</a>
+                                    <span class="text-gray-500">- デザインの参考</span>
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <svg class="heroicon text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
+                                    </svg>
+                                    <a href="#" class="text-blue-600 hover:text-blue-800">https://example-corp2.com</a>
+                                    <span class="text-gray-500">- 機能の参考</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h3 class="font-medium text-gray-800 mb-2">添付ファイル</h3>
+                            <div class="space-y-2">
+                                <div class="flex items-center gap-2 p-2 bg-gray-50 rounded-lg">
+                                    <svg class="heroicon text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                    </svg>
+                                    <span class="text-sm text-gray-700">サイトマップ.pdf (2.1MB)</span>
+                                </div>
+                                <div class="flex items-center gap-2 p-2 bg-gray-50 rounded-lg">
+                                    <svg class="heroicon text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                    </svg>
+                                    <span class="text-sm text-gray-700">要件定義書.docx (1.8MB)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q&A Section -->
+                <div class="kawaii-card p-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">Q&A</h2>
+                    <div class="space-y-4">
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <div class="flex items-start gap-3 mb-2">
+                                <span class="badge-kawaii bg-blue-100 text-blue-800 text-xs">Q</span>
+                                <p class="text-sm font-medium text-gray-800">既存のドメインやサーバーはそのまま使用しますか？</p>
+                            </div>
+                            <div class="flex items-start gap-3 ml-6">
+                                <span class="badge-kawaii bg-green-100 text-green-800 text-xs">A</span>
+                                <p class="text-sm text-gray-600">はい、現在のドメインとサーバー環境をそのまま使用します。サーバー情報は契約後にお渡しします。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <div class="flex items-start gap-3 mb-2">
+                                <span class="badge-kawaii bg-blue-100 text-blue-800 text-xs">Q</span>
+                                <p class="text-sm font-medium text-gray-800">コンテンツの移行作業も含まれますか？</p>
+                            </div>
+                            <div class="flex items-start gap-3 ml-6">
+                                <span class="badge-kawaii bg-green-100 text-green-800 text-xs">A</span>
+                                <p class="text-sm text-gray-600">基本的なコンテンツ移行は含まれますが、大量のデータがある場合は別途ご相談させていただきます。</p>
+                            </div>
+                        </div>
+                        
+                        <button class="btn-kawaii btn-outline-kawaii text-sm w-full">
+                            質問を投稿する
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="space-y-6">
+                <!-- Client Information -->
+                <div class="kawaii-card p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">発注者情報</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="avatar">
+                                <div class="w-12 rounded-full">
+                                    <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" alt="発注者" />
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-800">田中商事株式会社</h4>
+                                <p class="text-sm text-gray-600">東京都渋谷区</p>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div>
+                                <span class="text-gray-500">評価:</span>
+                                <div class="flex items-center gap-1">
+                                    <span class="text-yellow-400">⭐⭐⭐⭐⭐</span>
+                                    <span class="text-gray-600">(4.8)</span>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="text-gray-500">発注実績:</span>
+                                <span class="font-medium text-gray-800">15件</span>
+                            </div>
+                        </div>
+                        
+                        <div class="pt-4 border-t border-gray-200">
+                            <p class="text-sm text-gray-600">
+                                製造業を営む中小企業です。品質重視で長期的なパートナーシップを
+                                大切にしています。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Similar Projects -->
+                <div class="kawaii-card p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">類似案件</h3>
+                    <div class="space-y-3">
+                        <div class="border border-gray-200 rounded-lg p-3">
+                            <h4 class="font-medium text-gray-800 text-sm mb-1">ECサイトのUI改善</h4>
+                            <p class="text-xs text-gray-600 mb-2">¥300K - ¥500K</p>
+                            <div class="flex justify-between items-center">
+                                <span class="badge-kawaii bg-green-100 text-green-800 text-xs">募集中</span>
+                                <span class="text-xs text-gray-500">応募5件</span>
+                            </div>
+                        </div>
+                        
+                        <div class="border border-gray-200 rounded-lg p-3">
+                            <h4 class="font-medium text-gray-800 text-sm mb-1">LP制作・最適化</h4>
+                            <p class="text-xs text-gray-600 mb-2">¥200K - ¥400K</p>
+                            <div class="flex justify-between items-center">
+                                <span class="badge-kawaii bg-blue-100 text-blue-800 text-xs">急募</span>
+                                <span class="text-xs text-gray-500">応募8件</span>
+                            </div>
+                        </div>
+                        
+                        <div class="border border-gray-200 rounded-lg p-3">
+                            <h4 class="font-medium text-gray-800 text-sm mb-1">Webアプリ開発</h4>
+                            <p class="text-xs text-gray-600 mb-2">¥1M - ¥3M</p>
+                            <div class="flex justify-between items-center">
+                                <span class="badge-kawaii bg-purple-100 text-purple-800 text-xs">長期</span>
+                                <span class="text-xs text-gray-500">応募3件</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-kawaii btn-outline-kawaii text-sm w-full mt-4">
+                        類似案件をもっと見る
+                    </button>
+                </div>
+
+                <!-- Project Stats -->
+                <div class="kawaii-card p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">統計情報</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between">
+                            <span class="text-sm text-gray-600">応募数</span>
+                            <span class="font-medium text-gray-800">12件</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-sm text-gray-600">閲覧数</span>
+                            <span class="font-medium text-gray-800">156回</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-sm text-gray-600">お気に入り</span>
+                            <span class="font-medium text-gray-800">23件</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-sm text-gray-600">残り日数</span>
+                            <span class="font-medium text-red-600">28日</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Mobile sidebar toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('hidden');
+        });
+        
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            overlay.classList.add('hidden');
+        });
+
+        // Create proposal
+        function createProposal() {
+            window.location.href = 'create-proposal.html?project_id=1';
+        }
+
+        // Ask question
+        document.querySelector('button:contains("質問を投稿する")').addEventListener('click', () => {
+            alert('質問投稿フォームを開きます（デモ）');
+        });
+
+        // View similar projects
+        document.querySelector('button:contains("類似案件をもっと見る")').addEventListener('click', () => {
+            window.location.href = 'projects-list.html';
+        });
+    </script>
+</body>
+</html>

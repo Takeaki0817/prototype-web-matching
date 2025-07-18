@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新規案件作成 - WebMatch</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://unpkg.com/heroicons@2.0.18/24/outline/index.js"></script>
+    <script src="https://unpkg.com/heroicons@2.0.18/24/solid/index.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="header-kawaii fixed top-0 left-0 right-0 z-50 lg:left-80">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg hover:bg-gray-100" aria-label="メニューを開く">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+                <h1 class="text-2xl font-bold text-gray-800">新規案件作成</h1>
+            </div>
+            <div class="flex items-center gap-4">
+                <!-- Save Draft Button -->
+                <button class="btn-kawaii btn-outline-kawaii flex items-center gap-2">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
+                    </svg>
+                    下書き保存
+                </button>
+                
+                <!-- User Profile -->
+                <div class="dropdown dropdown-end">
+                    <div tabindex="0" class="btn btn-ghost btn-circle avatar">
+                        <div class="w-10 rounded-full">
+                            <img alt="プロフィール" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                        </div>
+                    </div>
+                    <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow-lg bg-white rounded-box w-52">
+                        <li><a href="dashboard-client.html">ダッシュボード</a></li>
+                        <li><a href="#profile">プロフィール</a></li>
+                        <li><a href="#settings">設定</a></li>
+                        <li><a href="index.html">ログアウト</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar-kawaii fixed left-0 top-0 h-full w-80 z-40 mobile-sidebar lg:transform-none">
+        <div class="p-6">
+            <!-- Logo -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-gray-800">WebMatch</h2>
+                <p class="text-sm text-gray-500">発注者ダッシュボード</p>
+            </div>
+            
+            <!-- User Info -->
+            <div class="mb-8 p-6 bg-white rounded-3xl shadow-sm border border-gray-200">
+                <div class="flex items-center gap-4">
+                    <div class="avatar">
+                        <div class="w-14 rounded-full">
+                            <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" alt="プロフィール" />
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-800">田中商事株式会社</h3>
+                        <p class="text-sm text-gray-500">発注者</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Navigation -->
+            <nav class="space-y-2">
+                <a href="dashboard-client.html" class="sidebar-item-kawaii flex items-center gap-3">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                    </svg>
+                    <span class="font-medium">ダッシュボード</span>
+                </a>
+                <a href="#" class="sidebar-item-kawaii active flex items-center gap-3">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
+                    <span class="font-medium">新規発注</span>
+                </a>
+                <a href="#" class="sidebar-item-kawaii flex items-center gap-3">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
+                    </svg>
+                    <span class="font-medium">案件管理</span>
+                </a>
+                <a href="proposals-list.html" class="sidebar-item-kawaii flex items-center gap-3">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                    </svg>
+                    <span class="font-medium">提案一覧</span>
+                </a>
+                <a href="chat.html" class="sidebar-item-kawaii flex items-center gap-3">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+                    </svg>
+                    <span class="font-medium">メッセージ</span>
+                </a>
+                <a href="payment.html" class="sidebar-item-kawaii flex items-center gap-3">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
+                    </svg>
+                    <span class="font-medium">支払い管理</span>
+                </a>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- Overlay for mobile -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden hidden"></div>
+
+    <!-- Main Content -->
+    <main class="main-content-kawaii lg:ml-80 pt-20">
+        <!-- Progress Indicator -->
+        <div class="mb-8">
+            <div class="kawaii-card p-6">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">案件作成の進捗</h2>
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm text-gray-600">Step 1 of 3</span>
+                    <span class="text-sm text-gray-600">33%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div class="bg-gray-800 h-2 rounded-full" style="width: 33%"></div>
+                </div>
+                <div class="flex justify-between mt-4 text-sm">
+                    <span class="text-gray-800 font-medium">基本情報</span>
+                    <span class="text-gray-500">詳細要件</span>
+                    <span class="text-gray-500">公開設定</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form -->
+        <form class="space-y-8">
+            <!-- Basic Information -->
+            <div class="kawaii-card p-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">基本情報</h3>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Project Name -->
+                    <div class="md:col-span-2">
+                        <label for="project-name" class="block text-sm font-medium text-gray-700 mb-2">
+                            プロジェクト名 <span class="text-red-500">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="project-name"
+                            name="project-name"
+                            class="form-input-kawaii w-full" 
+                            placeholder="例：コーポレートサイトのリニューアル"
+                            required
+                        >
+                        <p class="text-sm text-gray-500 mt-1">わかりやすいプロジェクト名を入力してください</p>
+                    </div>
+
+                    <!-- Category -->
+                    <div>
+                        <label for="category" class="block text-sm font-medium text-gray-700 mb-2">
+                            カテゴリー <span class="text-red-500">*</span>
+                        </label>
+                        <select id="category" name="category" class="form-input-kawaii w-full" required>
+                            <option value="">カテゴリーを選択</option>
+                            <option value="corporate">コーポレートサイト</option>
+                            <option value="ecommerce">ECサイト</option>
+                            <option value="landing">ランディングページ</option>
+                            <option value="webapp">Webアプリケーション</option>
+                            <option value="maintenance">保守・運用</option>
+                            <option value="other">その他</option>
+                        </select>
+                    </div>
+
+                    <!-- Budget -->
+                    <div>
+                        <label for="budget" class="block text-sm font-medium text-gray-700 mb-2">
+                            予算範囲 <span class="text-red-500">*</span>
+                        </label>
+                        <select id="budget" name="budget" class="form-input-kawaii w-full" required>
+                            <option value="">予算を選択</option>
+                            <option value="100000-300000">¥100,000 - ¥300,000</option>
+                            <option value="300000-500000">¥300,000 - ¥500,000</option>
+                            <option value="500000-1000000">¥500,000 - ¥1,000,000</option>
+                            <option value="1000000-3000000">¥1,000,000 - ¥3,000,000</option>
+                            <option value="3000000+">¥3,000,000以上</option>
+                            <option value="consultation">要相談</option>
+                        </select>
+                    </div>
+
+                    <!-- Deadline -->
+                    <div>
+                        <label for="deadline" class="block text-sm font-medium text-gray-700 mb-2">
+                            希望納期 <span class="text-red-500">*</span>
+                        </label>
+                        <input 
+                            type="date" 
+                            id="deadline"
+                            name="deadline"
+                            class="form-input-kawaii w-full" 
+                            required
+                        >
+                    </div>
+
+                    <!-- Work Period -->
+                    <div>
+                        <label for="work-period" class="block text-sm font-medium text-gray-700 mb-2">
+                            想定作業期間
+                        </label>
+                        <select id="work-period" name="work-period" class="form-input-kawaii w-full">
+                            <option value="">期間を選択</option>
+                            <option value="1month">1ヶ月以内</option>
+                            <option value="2months">2ヶ月以内</option>
+                            <option value="3months">3ヶ月以内</option>
+                            <option value="6months">6ヶ月以内</option>
+                            <option value="longterm">長期</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Requirements -->
+            <div class="kawaii-card p-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">詳細要件</h3>
+                
+                <div class="space-y-6">
+                    <!-- Project Background -->
+                    <div>
+                        <label for="background" class="block text-sm font-medium text-gray-700 mb-2">
+                            プロジェクトの背景・目的 <span class="text-red-500">*</span>
+                        </label>
+                        <textarea 
+                            id="background"
+                            name="background"
+                            rows="4" 
+                            class="form-input-kawaii w-full" 
+                            placeholder="なぜこのプロジェクトを行うのか、どのような課題を解決したいのかを詳しく記載してください"
+                            required
+                        ></textarea>
+                    </div>
+
+                    <!-- Target Users -->
+                    <div>
+                        <label for="target-users" class="block text-sm font-medium text-gray-700 mb-2">
+                            ターゲットユーザー
+                        </label>
+                        <textarea 
+                            id="target-users"
+                            name="target-users"
+                            rows="3" 
+                            class="form-input-kawaii w-full" 
+                            placeholder="サイトを利用する主なユーザー層について詳しく記載してください"
+                        ></textarea>
+                    </div>
+
+                    <!-- Required Deliverables -->
+                    <div>
+                        <label for="deliverables" class="block text-sm font-medium text-gray-700 mb-2">
+                            必要な成果物 <span class="text-red-500">*</span>
+                        </label>
+                        <div class="space-y-3">
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <label class="flex items-center">
+                                    <input type="checkbox" name="deliverables[]" value="design" class="rounded border-gray-300 mr-2">
+                                    <span>デザイン（PSD/Figma等）</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" name="deliverables[]" value="coding" class="rounded border-gray-300 mr-2">
+                                    <span>コーディング（HTML/CSS/JS）</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" name="deliverables[]" value="cms" class="rounded border-gray-300 mr-2">
+                                    <span>CMS構築</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" name="deliverables[]" value="responsive" class="rounded border-gray-300 mr-2">
+                                    <span>レスポンシブ対応</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" name="deliverables[]" value="seo" class="rounded border-gray-300 mr-2">
+                                    <span>SEO対策</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" name="deliverables[]" value="maintenance" class="rounded border-gray-300 mr-2">
+                                    <span>保守・運用</span>
+                                </label>
+                            </div>
+                            <textarea 
+                                name="deliverables-other"
+                                rows="2" 
+                                class="form-input-kawaii w-full" 
+                                placeholder="その他の成果物があれば記載してください"
+                            ></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Reference Sites -->
+                    <div>
+                        <label for="references" class="block text-sm font-medium text-gray-700 mb-2">
+                            参考サイト・デザイン
+                        </label>
+                        <textarea 
+                            id="references"
+                            name="references"
+                            rows="3" 
+                            class="form-input-kawaii w-full" 
+                            placeholder="参考にしたいサイトのURLやデザインの方向性を記載してください"
+                        ></textarea>
+                    </div>
+
+                    <!-- Additional Requirements -->
+                    <div>
+                        <label for="additional" class="block text-sm font-medium text-gray-700 mb-2">
+                            その他要望・注意事項
+                        </label>
+                        <textarea 
+                            id="additional"
+                            name="additional"
+                            rows="4" 
+                            class="form-input-kawaii w-full" 
+                            placeholder="技術的な要望、デザインの制約事項、その他特記事項があれば記載してください"
+                        ></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills Requirements -->
+            <div class="kawaii-card p-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">募集条件</h3>
+                
+                <div class="space-y-6">
+                    <!-- Required Skills -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-3">
+                            必須スキル <span class="text-red-500">*</span>
+                        </label>
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <label class="flex items-center">
+                                <input type="checkbox" name="required-skills[]" value="html-css" class="rounded border-gray-300 mr-2">
+                                <span>HTML/CSS</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" name="required-skills[]" value="javascript" class="rounded border-gray-300 mr-2">
+                                <span>JavaScript</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" name="required-skills[]" value="react" class="rounded border-gray-300 mr-2">
+                                <span>React</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" name="required-skills[]" value="vue" class="rounded border-gray-300 mr-2">
+                                <span>Vue.js</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" name="required-skills[]" value="php" class="rounded border-gray-300 mr-2">
+                                <span>PHP</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" name="required-skills[]" value="wordpress" class="rounded border-gray-300 mr-2">
+                                <span>WordPress</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" name="required-skills[]" value="design" class="rounded border-gray-300 mr-2">
+                                <span>UI/UXデザイン</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" name="required-skills[]" value="seo" class="rounded border-gray-300 mr-2">
+                                <span>SEO</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" name="required-skills[]" value="aws" class="rounded border-gray-300 mr-2">
+                                <span>AWS</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Preferred Skills -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-3">
+                            歓迎スキル
+                        </label>
+                        <textarea 
+                            name="preferred-skills"
+                            rows="3" 
+                            class="form-input-kawaii w-full" 
+                            placeholder="あると嬉しいスキルや経験があれば記載してください"
+                        ></textarea>
+                    </div>
+
+                    <!-- Application Deadline -->
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="application-deadline" class="block text-sm font-medium text-gray-700 mb-2">
+                                募集期限
+                            </label>
+                            <input 
+                                type="date" 
+                                id="application-deadline"
+                                name="application-deadline"
+                                class="form-input-kawaii w-full"
+                            >
+                        </div>
+                        <div>
+                            <label for="application-limit" class="block text-sm font-medium text-gray-700 mb-2">
+                                募集人数
+                            </label>
+                            <select id="application-limit" name="application-limit" class="form-input-kawaii w-full">
+                                <option value="">制限なし</option>
+                                <option value="1">1名</option>
+                                <option value="2">2名</option>
+                                <option value="3">3名</option>
+                                <option value="5">5名</option>
+                                <option value="10">10名</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- File Attachments -->
+            <div class="kawaii-card p-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">添付ファイル</h3>
+                
+                <div class="space-y-6">
+                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+                        <svg class="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                        </svg>
+                        <p class="text-lg font-medium text-gray-700 mb-2">ファイルをドラッグ&ドロップ</p>
+                        <p class="text-sm text-gray-500 mb-4">または</p>
+                        <button type="button" class="btn-kawaii btn-outline-kawaii">
+                            ファイルを選択
+                        </button>
+                        <input type="file" multiple class="hidden" accept=".pdf,.doc,.docx,.ppt,.pptx,.jpg,.png,.gif">
+                    </div>
+                    <p class="text-sm text-gray-500">
+                        対応ファイル: PDF, Word, PowerPoint, 画像ファイル（最大10MB、5ファイルまで）
+                    </p>
+                </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-between">
+                <button type="button" class="btn-kawaii btn-outline-kawaii">
+                    下書き保存
+                </button>
+                <div class="flex gap-4">
+                    <button type="button" class="btn-kawaii btn-outline-kawaii">
+                        プレビュー
+                    </button>
+                    <button type="submit" class="btn-kawaii btn-primary-kawaii">
+                        運営に確認を依頼
+                    </button>
+                </div>
+            </div>
+        </form>
+    </main>
+
+    <script>
+        // Mobile sidebar toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('hidden');
+        });
+        
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            overlay.classList.add('hidden');
+        });
+
+        // Form validation and submission
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Show success message (demo)
+            alert('案件の作成申請を運営に送信しました。確認後、クリエイターに公開されます。');
+            
+            // Redirect to dashboard
+            window.location.href = 'dashboard-client.html';
+        });
+
+        // Auto-save functionality (demo)
+        let autoSaveTimer;
+        const formInputs = document.querySelectorAll('input, textarea, select');
+        
+        formInputs.forEach(input => {
+            input.addEventListener('input', () => {
+                clearTimeout(autoSaveTimer);
+                autoSaveTimer = setTimeout(() => {
+                    // Auto-save logic (demo)
+                    console.log('Auto-saved form data');
+                }, 2000);
+            });
+        });
+
+        // File upload handling
+        const fileInput = document.querySelector('input[type="file"]');
+        const uploadArea = document.querySelector('.border-dashed');
+        
+        uploadArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('border-gray-400', 'bg-gray-50');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('border-gray-400', 'bg-gray-50');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('border-gray-400', 'bg-gray-50');
+            
+            const files = e.dataTransfer.files;
+            handleFiles(files);
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+        });
+
+        function handleFiles(files) {
+            // Handle file upload (demo)
+            console.log('Files selected:', files);
+        }
+    </script>
+</body>
+</html>

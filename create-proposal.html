@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>提案作成 - WebMatch</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://unpkg.com/heroicons@2.0.18/24/outline/index.js"></script>
+    <script src="https://unpkg.com/heroicons@2.0.18/24/solid/index.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="header-kawaii fixed top-0 left-0 right-0 z-50 lg:left-80">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg hover:bg-gray-100" aria-label="メニューを開く">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+                <h1 class="text-2xl font-bold text-gray-800">提案作成</h1>
+            </div>
+            <div class="flex items-center gap-4">
+                <!-- Save Draft Button -->
+                <button class="btn-kawaii btn-outline-kawaii flex items-center gap-2">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
+                    </svg>
+                    下書き保存
+                </button>
+                
+                <!-- User Profile -->
+                <div class="dropdown dropdown-end">
+                    <div tabindex="0" class="btn btn-ghost btn-circle avatar">
+                        <div class="w-10 rounded-full">
+                            <img alt="プロフィール" src="https://daisyui.com/images/stock/photo-1535713875002-d1d0cf377fde.jpg" />
+                        </div>
+                    </div>
+                    <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow-lg bg-white rounded-box w-52">
+                        <li><a href="dashboard-creator.html">ダッシュボード</a></li>
+                        <li><a href="#profile">プロフィール</a></li>
+                        <li><a href="#settings">設定</a></li>
+                        <li><a href="index.html">ログアウト</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar-kawaii fixed left-0 top-0 h-full w-80 z-40 mobile-sidebar lg:transform-none">
+        <div class="p-6">
+            <!-- Logo -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-gray-800">WebMatch</h2>
+                <p class="text-sm text-gray-500">受注者ダッシュボード</p>
+            </div>
+            
+            <!-- User Info -->
+            <div class="mb-8 p-6 bg-white rounded-3xl shadow-sm border border-gray-200">
+                <div class="flex items-center gap-4">
+                    <div class="avatar">
+                        <div class="w-14 rounded-full">
+                            <img src="https://daisyui.com/images/stock/photo-1535713875002-d1d0cf377fde.jpg" alt="プロフィール" />
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-800">田中 太郎</h3>
+                        <p class="text-sm text-gray-500">フリーランス</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Navigation -->
+            <nav class="space-y-2">
+                <a href="dashboard-creator.html" class="sidebar-item-kawaii flex items-center gap-3">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                    </svg>
+                    <span class="font-medium">ダッシュボード</span>
+                </a>
+                <a href="projects-list.html" class="sidebar-item-kawaii flex items-center gap-3">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                    </svg>
+                    <span class="font-medium">案件検索</span>
+                </a>
+                <a href="proposal-management.html" class="sidebar-item-kawaii active flex items-center gap-3">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                    </svg>
+                    <span class="font-medium">提案管理</span>
+                </a>
+                <a href="chat.html" class="sidebar-item-kawaii flex items-center gap-3">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+                    </svg>
+                    <span class="font-medium">メッセージ</span>
+                </a>
+                <a href="notifications.html" class="sidebar-item-kawaii flex items-center gap-3">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+                    </svg>
+                    <span class="font-medium">通知</span>
+                </a>
+                <a href="review.html" class="sidebar-item-kawaii flex items-center gap-3">
+                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                    </svg>
+                    <span class="font-medium">評価</span>
+                </a>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- Overlay for mobile -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden hidden"></div>
+
+    <!-- Main Content -->
+    <main class="main-content-kawaii lg:ml-80 pt-20">
+        <!-- Project Info -->
+        <div class="mb-8">
+            <div class="kawaii-card p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-800">コーポレートサイトのリニューアル</h2>
+                        <p class="text-sm text-gray-500">発注者: 田中商事株式会社</p>
+                    </div>
+                    <span class="badge-kawaii bg-blue-100 text-blue-800">募集中</span>
+                </div>
+                <div class="grid md:grid-cols-4 gap-4 text-sm">
+                    <div>
+                        <span class="text-gray-500">予算:</span>
+                        <span class="font-medium ml-2">¥500,000 - ¥1,000,000</span>
+                    </div>
+                    <div>
+                        <span class="text-gray-500">納期:</span>
+                        <span class="font-medium ml-2">2024年8月31日</span>
+                    </div>
+                    <div>
+                        <span class="text-gray-500">応募数:</span>
+                        <span class="font-medium ml-2">12件</span>
+                    </div>
+                    <div>
+                        <span class="text-gray-500">締切:</span>
+                        <span class="font-medium ml-2">28日後</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-8">
+            <!-- Main Form -->
+            <div class="lg:col-span-2">
+                <form class="space-y-8">
+                    <!-- Proposal Overview -->
+                    <div class="kawaii-card p-8">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">提案概要</h3>
+                        
+                        <div class="space-y-6">
+                            <!-- Proposal Title -->
+                            <div>
+                                <label for="proposal-title" class="block text-sm font-medium text-gray-700 mb-2">
+                                    提案タイトル <span class="text-red-500">*</span>
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="proposal-title"
+                                    name="proposal-title"
+                                    class="form-input-kawaii w-full" 
+                                    placeholder="例：React.jsで高速・SEO対応のコーポレートサイトを構築します"
+                                    required
+                                >
+                            </div>
+
+                            <!-- Proposal Summary -->
+                            <div>
+                                <label for="proposal-summary" class="block text-sm font-medium text-gray-700 mb-2">
+                                    提案要約 <span class="text-red-500">*</span>
+                                </label>
+                                <textarea 
+                                    id="proposal-summary"
+                                    name="proposal-summary"
+                                    rows="3" 
+                                    class="form-input-kawaii w-full" 
+                                    placeholder="提案内容を3-4行で簡潔にまとめてください"
+                                    required
+                                ></textarea>
+                                <p class="text-sm text-gray-500 mt-1">この要約は提案一覧で表示されます</p>
+                            </div>
+
+                            <!-- Detailed Proposal -->
+                            <div>
+                                <label for="proposal-detail" class="block text-sm font-medium text-gray-700 mb-2">
+                                    詳細提案内容 <span class="text-red-500">*</span>
+                                </label>
+                                <textarea 
+                                    id="proposal-detail"
+                                    name="proposal-detail"
+                                    rows="8" 
+                                    class="form-input-kawaii w-full" 
+                                    placeholder="技術的なアプローチ、実装方法、特徴的な機能、品質保証方法などを詳しく記載してください"
+                                    required
+                                ></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pricing and Timeline -->
+                    <div class="kawaii-card p-8">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">見積・スケジュール</h3>
+                        
+                        <div class="space-y-6">
+                            <!-- Pricing -->
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="total-price" class="block text-sm font-medium text-gray-700 mb-2">
+                                        提案金額 <span class="text-red-500">*</span>
+                                    </label>
+                                    <div class="relative">
+                                        <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500">¥</span>
+                                        <input 
+                                            type="number" 
+                                            id="total-price"
+                                            name="total-price"
+                                            class="form-input-kawaii w-full pl-8" 
+                                            placeholder="780000"
+                                            required
+                                        >
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label for="delivery-date" class="block text-sm font-medium text-gray-700 mb-2">
+                                        納期 <span class="text-red-500">*</span>
+                                    </label>
+                                    <input 
+                                        type="date" 
+                                        id="delivery-date"
+                                        name="delivery-date"
+                                        class="form-input-kawaii w-full" 
+                                        required
+                                    >
+                                </div>
+                            </div>
+
+                            <!-- Detailed Pricing -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-3">
+                                    詳細見積 <span class="text-red-500">*</span>
+                                </label>
+                                <div class="space-y-3" id="pricing-items">
+                                    <div class="grid grid-cols-3 gap-3 pricing-item">
+                                        <input type="text" placeholder="項目名" class="form-input-kawaii" name="item-name[]">
+                                        <input type="number" placeholder="金額" class="form-input-kawaii" name="item-price[]">
+                                        <div class="flex items-center">
+                                            <input type="text" placeholder="備考" class="form-input-kawaii flex-1" name="item-note[]">
+                                            <button type="button" class="ml-2 p-2 text-red-500 hover:bg-red-50 rounded" onclick="removeItem(this)">
+                                                <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn-kawaii btn-outline-kawaii text-sm mt-3" onclick="addPricingItem()">
+                                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                    </svg>
+                                    項目を追加
+                                </button>
+                            </div>
+
+                            <!-- Payment Terms -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-3">
+                                    支払い条件
+                                </label>
+                                <div class="grid md:grid-cols-3 gap-4">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="payment-terms" value="upfront" class="mr-2">
+                                        <span>一括前払い</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="payment-terms" value="split" class="mr-2" checked>
+                                        <span>分割払い</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="payment-terms" value="completion" class="mr-2">
+                                        <span>完成後一括</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Portfolio Selection -->
+                    <div class="kawaii-card p-8">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">関連実績</h3>
+                        
+                        <div class="space-y-4">
+                            <p class="text-sm text-gray-600">
+                                この案件に関連する過去の実績を選択してください（最大3件）
+                            </p>
+                            
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <label class="cursor-pointer">
+                                    <input type="checkbox" name="portfolio[]" value="1" class="sr-only portfolio-checkbox">
+                                    <div class="border-2 border-gray-200 rounded-lg p-4 transition-all portfolio-item">
+                                        <div class="flex items-center gap-3 mb-3">
+                                            <img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="実績1" class="w-16 h-12 object-cover rounded">
+                                            <div>
+                                                <h4 class="font-medium text-gray-800">製造業コーポレートサイト</h4>
+                                                <p class="text-sm text-gray-600">React.js / WordPress</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </label>
+                                
+                                <label class="cursor-pointer">
+                                    <input type="checkbox" name="portfolio[]" value="2" class="sr-only portfolio-checkbox">
+                                    <div class="border-2 border-gray-200 rounded-lg p-4 transition-all portfolio-item">
+                                        <div class="flex items-center gap-3 mb-3">
+                                            <img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="実績2" class="w-16 h-12 object-cover rounded">
+                                            <div>
+                                                <h4 class="font-medium text-gray-800">企業サイトリニューアル</h4>
+                                                <p class="text-sm text-gray-600">Vue.js / Strapi</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </label>
+                                
+                                <label class="cursor-pointer">
+                                    <input type="checkbox" name="portfolio[]" value="3" class="sr-only portfolio-checkbox">
+                                    <div class="border-2 border-gray-200 rounded-lg p-4 transition-all portfolio-item">
+                                        <div class="flex items-center gap-3 mb-3">
+                                            <img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="実績3" class="w-16 h-12 object-cover rounded">
+                                            <div>
+                                                <h4 class="font-medium text-gray-800">レスポンシブWebサイト</h4>
+                                                <p class="text-sm text-gray-600">HTML/CSS / JavaScript</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Information -->
+                    <div class="kawaii-card p-8">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">追加情報</h3>
+                        
+                        <div class="space-y-6">
+                            <!-- Communication Preferences -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-3">
+                                    コミュニケーション方法
+                                </label>
+                                <div class="space-y-2">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="communication[]" value="chat" class="mr-2" checked>
+                                        <span>チャット（平日9:00-18:00）</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="communication[]" value="video" class="mr-2">
+                                        <span>ビデオ会議（週1回程度）</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="communication[]" value="email" class="mr-2">
+                                        <span>メール</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Questions for Client -->
+                            <div>
+                                <label for="questions" class="block text-sm font-medium text-gray-700 mb-2">
+                                    発注者への質問事項
+                                </label>
+                                <textarea 
+                                    id="questions"
+                                    name="questions"
+                                    rows="4" 
+                                    class="form-input-kawaii w-full" 
+                                    placeholder="プロジェクトに関して確認したい点があれば記載してください"
+                                ></textarea>
+                            </div>
+
+                            <!-- Special Notes -->
+                            <div>
+                                <label for="special-notes" class="block text-sm font-medium text-gray-700 mb-2">
+                                    特記事項
+                                </label>
+                                <textarea 
+                                    id="special-notes"
+                                    name="special-notes"
+                                    rows="3" 
+                                    class="form-input-kawaii w-full" 
+                                    placeholder="その他アピールポイントや注意事項があれば記載してください"
+                                ></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="flex flex-col sm:flex-row gap-4 justify-between">
+                        <button type="button" class="btn-kawaii btn-outline-kawaii">
+                            下書き保存
+                        </button>
+                        <div class="flex gap-4">
+                            <button type="button" class="btn-kawaii btn-outline-kawaii">
+                                プレビュー
+                            </button>
+                            <button type="submit" class="btn-kawaii btn-primary-kawaii">
+                                提案を送信
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="space-y-6">
+                <!-- Tips -->
+                <div class="kawaii-card p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">提案のコツ</h3>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex items-start gap-2">
+                            <svg class="heroicon text-blue-500 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                            </svg>
+                            <span>具体的な技術的アプローチを記載する</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg class="heroicon text-green-500 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span>過去の類似実績を含める</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg class="heroicon text-purple-500 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span>現実的なスケジュールを提示する</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg class="heroicon text-orange-500 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+                            </svg>
+                            <span>コミュニケーション方法を明確にする</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Price Calculator -->
+                <div class="kawaii-card p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">見積計算機</h3>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between">
+                            <span>デザイン</span>
+                            <span class="font-medium" id="design-cost">¥200,000</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>フロントエンド</span>
+                            <span class="font-medium" id="frontend-cost">¥350,000</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>CMS構築</span>
+                            <span class="font-medium" id="cms-cost">¥180,000</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>SEO対策</span>
+                            <span class="font-medium" id="seo-cost">¥50,000</span>
+                        </div>
+                        <hr class="border-gray-200">
+                        <div class="flex justify-between font-bold">
+                            <span>合計</span>
+                            <span id="total-calc">¥780,000</span>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-kawaii btn-outline-kawaii text-sm w-full mt-4" onclick="applyCalculatedPrice()">
+                        この金額を適用
+                    </button>
+                </div>
+
+                <!-- Competitor Analysis -->
+                <div class="kawaii-card p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">他の提案状況</h3>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between">
+                            <span>提案数</span>
+                            <span class="font-medium">12件</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>平均価格</span>
+                            <span class="font-medium">¥650,000</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>最低価格</span>
+                            <span class="font-medium">¥420,000</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>最高価格</span>
+                            <span class="font-medium">¥1,200,000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Mobile sidebar toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('hidden');
+        });
+        
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            overlay.classList.add('hidden');
+        });
+
+        // Add pricing item
+        function addPricingItem() {
+            const container = document.getElementById('pricing-items');
+            const newItem = document.createElement('div');
+            newItem.className = 'grid grid-cols-3 gap-3 pricing-item';
+            newItem.innerHTML = `
+                <input type="text" placeholder="項目名" class="form-input-kawaii" name="item-name[]">
+                <input type="number" placeholder="金額" class="form-input-kawaii" name="item-price[]">
+                <div class="flex items-center">
+                    <input type="text" placeholder="備考" class="form-input-kawaii flex-1" name="item-note[]">
+                    <button type="button" class="ml-2 p-2 text-red-500 hover:bg-red-50 rounded" onclick="removeItem(this)">
+                        <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            `;
+            container.appendChild(newItem);
+        }
+
+        // Remove pricing item
+        function removeItem(button) {
+            button.closest('.pricing-item').remove();
+        }
+
+        // Portfolio selection
+        document.querySelectorAll('.portfolio-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const item = this.nextElementSibling;
+                if (this.checked) {
+                    item.classList.add('border-gray-800', 'bg-gray-50');
+                    item.classList.remove('border-gray-200');
+                } else {
+                    item.classList.remove('border-gray-800', 'bg-gray-50');
+                    item.classList.add('border-gray-200');
+                }
+            });
+        });
+
+        // Apply calculated price
+        function applyCalculatedPrice() {
+            const totalPrice = document.getElementById('total-price');
+            totalPrice.value = '780000';
+            alert('計算機の金額を適用しました');
+        }
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            alert('提案を送信しました。発注者からの返答をお待ちください。');
+            window.location.href = 'proposal-management.html';
+        });
+
+        // Auto-save functionality
+        let autoSaveTimer;
+        const formInputs = document.querySelectorAll('input, textarea, select');
+        
+        formInputs.forEach(input => {
+            input.addEventListener('input', () => {
+                clearTimeout(autoSaveTimer);
+                autoSaveTimer = setTimeout(() => {
+                    console.log('Auto-saved proposal');
+                }, 2000);
+            });
+        });
+
+        // Preview functionality
+        document.querySelector('button[type="button"]:contains("プレビュー")').addEventListener('click', () => {
+            alert('提案プレビューを表示します（デモ）');
+        });
+    </script>
+</body>
+</html>
