@@ -1,516 +1,741 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>提案一覧・選定 - WebMatch</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.10/dist/full.min.css" rel="stylesheet" type="text/css" />
-    <script src="https://unpkg.com/heroicons@2.0.18/24/outline/index.js"></script>
-    <script src="https://unpkg.com/heroicons@2.0.18/24/solid/index.js"></script>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body class="bg-gray-50">
-    <!-- Header -->
-    <header class="header-kawaii fixed top-0 left-0 right-0 z-50 lg:left-80">
-        <div class="flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg hover:bg-gray-100" aria-label="メニューを開く">
-                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                    </svg>
-                </button>
-                <h1 class="text-2xl font-bold text-gray-800">提案一覧・選定</h1>
-            </div>
-            <div class="flex items-center gap-4">
-                <div class="flex items-center gap-2 text-sm text-gray-600">
-                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>募集期限: 2024/08/15</span>
-                </div>
-                
-                <!-- User Profile -->
-                <div class="dropdown dropdown-end">
-                    <div tabindex="0" class="btn btn-ghost btn-circle avatar">
-                        <div class="w-10 rounded-full">
-                            <img alt="プロフィール" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                        </div>
-                    </div>
-                    <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow-lg bg-white rounded-box w-52">
-                        <li><a href="dashboard-client.html">ダッシュボード</a></li>
-                        <li><a href="#profile">プロフィール</a></li>
-                        <li><a href="#settings">設定</a></li>
-                        <li><a href="index.html">ログアウト</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </header>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>提案一覧・選定 - WebMatch</title>
 
-    <!-- Sidebar -->
-    <aside id="sidebar" class="sidebar-kawaii fixed left-0 top-0 h-full w-80 z-40 mobile-sidebar lg:transform-none">
-        <div class="p-6">
-            <!-- Logo -->
-            <div class="mb-8">
-                <h2 class="text-2xl font-bold text-gray-800">WebMatch</h2>
-                <p class="text-sm text-gray-500">発注者ダッシュボード</p>
-            </div>
-            
-            <!-- User Info -->
-            <div class="mb-8 p-6 bg-white rounded-3xl shadow-sm border border-gray-200">
-                <div class="flex items-center gap-4">
-                    <div class="avatar">
-                        <div class="w-14 rounded-full">
-                            <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" alt="プロフィール" />
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-gray-800">田中商事株式会社</h3>
-                        <p class="text-sm text-gray-500">発注者</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Navigation -->
-            <nav class="space-y-2">
-                <a href="dashboard-client.html" class="sidebar-item-kawaii flex items-center gap-3">
-                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                    </svg>
-                    <span class="font-medium">ダッシュボード</span>
-                </a>
-                <a href="create-project.html" class="sidebar-item-kawaii flex items-center gap-3">
-                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                    </svg>
-                    <span class="font-medium">新規発注</span>
-                </a>
-                <a href="#" class="sidebar-item-kawaii flex items-center gap-3">
-                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
-                    </svg>
-                    <span class="font-medium">案件管理</span>
-                </a>
-                <a href="#" class="sidebar-item-kawaii active flex items-center gap-3">
-                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-                    </svg>
-                    <span class="font-medium">提案一覧</span>
-                </a>
-                <a href="chat.html" class="sidebar-item-kawaii flex items-center gap-3">
-                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
-                    </svg>
-                    <span class="font-medium">メッセージ</span>
-                </a>
-                <a href="payment.html" class="sidebar-item-kawaii flex items-center gap-3">
-                    <svg class="heroicon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
-                    </svg>
-                    <span class="font-medium">支払い管理</span>
-                </a>
-            </nav>
-        </div>
-    </aside>
+		<!-- 非公開 -->
+		<script blocking="render" async src="js/auth.js"></script>
+		<meta name="robots" content="noindex, nofollow" />
 
-    <!-- Overlay for mobile -->
-    <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden hidden"></div>
+		<script src="https://cdn.tailwindcss.com"></script>
+		<link
+			href="https://cdn.jsdelivr.net/npm/daisyui@4.4.10/dist/full.min.css"
+			rel="stylesheet"
+			type="text/css"
+		/>
+		<script src="https://unpkg.com/heroicons@2.0.18/24/outline/index.js"></script>
+		<script src="https://unpkg.com/heroicons@2.0.18/24/solid/index.js"></script>
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
+	<body class="bg-gray-50">
+		<!-- Header -->
+		<header class="header-kawaii fixed top-0 left-0 right-0 z-50 lg:left-80">
+			<div class="flex items-center justify-between">
+				<div class="flex items-center gap-4">
+					<button
+						id="mobile-menu-btn"
+						class="lg:hidden p-2 rounded-lg hover:bg-gray-100"
+						aria-label="メニューを開く"
+					>
+						<svg
+							class="heroicon"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+							/>
+						</svg>
+					</button>
+					<h1 class="text-2xl font-bold text-gray-800">提案一覧・選定</h1>
+				</div>
+				<div class="flex items-center gap-4">
+					<div class="flex items-center gap-2 text-sm text-gray-600">
+						<svg
+							class="heroicon"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+							/>
+						</svg>
+						<span>募集期限: 2024/08/15</span>
+					</div>
 
-    <!-- Main Content -->
-    <main class="main-content-kawaii lg:ml-80 pt-20">
-        <!-- Project Overview -->
-        <div class="mb-8">
-            <div class="kawaii-card p-6">
-                <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-xl font-bold text-gray-800">コーポレートサイトのリニューアル</h2>
-                    <span class="badge-kawaii bg-green-100 text-green-800">募集中</span>
-                </div>
-                <div class="grid md:grid-cols-4 gap-4 text-sm">
-                    <div>
-                        <span class="text-gray-500">予算:</span>
-                        <span class="font-medium ml-2">¥500,000 - ¥1,000,000</span>
-                    </div>
-                    <div>
-                        <span class="text-gray-500">納期:</span>
-                        <span class="font-medium ml-2">2024年8月31日</span>
-                    </div>
-                    <div>
-                        <span class="text-gray-500">応募数:</span>
-                        <span class="font-medium ml-2">12件</span>
-                    </div>
-                    <div>
-                        <span class="text-gray-500">期限:</span>
-                        <span class="font-medium ml-2">3日後</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+					<!-- User Profile -->
+					<div class="dropdown dropdown-end">
+						<div tabindex="0" class="btn btn-ghost btn-circle avatar">
+							<div class="w-10 rounded-full">
+								<img
+									alt="プロフィール"
+									src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+								/>
+							</div>
+						</div>
+						<ul
+							tabindex="0"
+							class="dropdown-content z-[1] menu p-2 shadow-lg bg-white rounded-box w-52"
+						>
+							<li><a href="dashboard-client.html">ダッシュボード</a></li>
+							<li><a href="#profile">プロフィール</a></li>
+							<li><a href="#settings">設定</a></li>
+							<li><a href="index.html">ログアウト</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</header>
 
-        <!-- Filter and Sort -->
-        <div class="mb-6">
-            <div class="kawaii-card p-4">
-                <div class="flex flex-col sm:flex-row gap-4 items-center justify-between">
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <!-- Filter by Rating -->
-                        <select class="form-input-kawaii">
-                            <option value="">評価で絞り込み</option>
-                            <option value="5">⭐⭐⭐⭐⭐</option>
-                            <option value="4">⭐⭐⭐⭐ 以上</option>
-                            <option value="3">⭐⭐⭐ 以上</option>
-                        </select>
-                        
-                        <!-- Filter by Price -->
-                        <select class="form-input-kawaii">
-                            <option value="">価格で絞り込み</option>
-                            <option value="low">価格が安い順</option>
-                            <option value="high">価格が高い順</option>
-                            <option value="budget">予算内</option>
-                        </select>
-                        
-                        <!-- Filter by Skills -->
-                        <select class="form-input-kawaii">
-                            <option value="">スキルで絞り込み</option>
-                            <option value="react">React</option>
-                            <option value="vue">Vue.js</option>
-                            <option value="wordpress">WordPress</option>
-                            <option value="design">UI/UXデザイン</option>
-                        </select>
-                    </div>
-                    
-                    <div class="flex items-center gap-2 text-sm text-gray-600">
-                        <span>12件の提案</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+		<!-- Sidebar -->
+		<aside
+			id="sidebar"
+			class="sidebar-kawaii fixed left-0 top-0 h-full w-80 z-40 mobile-sidebar lg:transform-none"
+		>
+			<div class="p-6">
+				<!-- Logo -->
+				<div class="mb-8">
+					<h2 class="text-2xl font-bold text-gray-800">WebMatch</h2>
+					<p class="text-sm text-gray-500">発注者ダッシュボード</p>
+				</div>
 
-        <!-- Proposals List -->
-        <div class="space-y-6">
-            <!-- Proposal 1 -->
-            <div class="kawaii-card p-6">
-                <div class="flex flex-col lg:flex-row gap-6">
-                    <!-- Creator Info -->
-                    <div class="flex-shrink-0">
-                        <div class="flex items-center gap-4 mb-4">
-                            <div class="avatar">
-                                <div class="w-16 rounded-full">
-                                    <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" alt="クリエイター" />
-                                </div>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-bold text-gray-800">株式会社WebStudio</h3>
-                                <div class="flex items-center gap-2">
-                                    <div class="flex items-center">
-                                        <span class="text-yellow-400">⭐⭐⭐⭐⭐</span>
-                                        <span class="text-sm text-gray-600 ml-1">(4.8)</span>
-                                    </div>
-                                    <span class="text-sm text-gray-500">•</span>
-                                    <span class="text-sm text-gray-600">東京都</span>
-                                </div>
-                                <p class="text-sm text-gray-600">実績: 127件</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Proposal Content -->
-                    <div class="flex-1">
-                        <div class="mb-4">
-                            <h4 class="font-bold text-gray-800 mb-2">提案内容</h4>
-                            <p class="text-gray-700 text-sm leading-relaxed">
-                                貴社のコーポレートサイトリニューアルについて、弊社で対応させていただければと思います。
-                                React.jsを使用したモダンなWebサイトの構築が得意で、SEO対策やレスポンシブデザインにも
-                                対応いたします。デザインからコーディング、CMS構築まで一貫してサポートいたします。
-                            </p>
-                        </div>
-                        
-                        <!-- Skills -->
-                        <div class="mb-4">
-                            <h5 class="font-medium text-gray-800 mb-2">保有スキル</h5>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="badge-kawaii bg-blue-100 text-blue-800">React</span>
-                                <span class="badge-kawaii bg-green-100 text-green-800">WordPress</span>
-                                <span class="badge-kawaii bg-purple-100 text-purple-800">UI/UXデザイン</span>
-                                <span class="badge-kawaii bg-orange-100 text-orange-800">SEO</span>
-                            </div>
-                        </div>
-                        
-                        <!-- Price and Timeline -->
-                        <div class="grid md:grid-cols-3 gap-4 mb-4">
-                            <div>
-                                <h5 class="font-medium text-gray-800 mb-1">提案価格</h5>
-                                <p class="text-xl font-bold text-gray-800">¥780,000</p>
-                            </div>
-                            <div>
-                                <h5 class="font-medium text-gray-800 mb-1">納期</h5>
-                                <p class="text-gray-700">8月25日</p>
-                            </div>
-                            <div>
-                                <h5 class="font-medium text-gray-800 mb-1">対応時間</h5>
-                                <p class="text-gray-700">平日9:00-18:00</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Portfolio -->
-                        <div class="mb-4">
-                            <h5 class="font-medium text-gray-800 mb-2">関連実績</h5>
-                            <div class="grid grid-cols-3 gap-2">
-                                <img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="実績1" class="w-full h-16 object-cover rounded-lg">
-                                <img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="実績2" class="w-full h-16 object-cover rounded-lg">
-                                <img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="実績3" class="w-full h-16 object-cover rounded-lg">
-                            </div>
-                        </div>
-                        
-                        <!-- Actions -->
-                        <div class="flex flex-col sm:flex-row gap-3">
-                            <button class="btn-kawaii btn-primary-kawaii" onclick="selectProposal(1)">
-                                この提案を選定する
-                            </button>
-                            <button class="btn-kawaii btn-outline-kawaii" onclick="viewDetail(1)">
-                                詳細を見る
-                            </button>
-                            <button class="btn-kawaii btn-outline-kawaii" onclick="sendMessage(1)">
-                                メッセージを送る
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+				<!-- User Info -->
+				<div
+					class="mb-8 p-6 bg-white rounded-3xl shadow-sm border border-gray-200"
+				>
+					<div class="flex items-center gap-4">
+						<div class="avatar">
+							<div class="w-14 rounded-full">
+								<img
+									src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+									alt="プロフィール"
+								/>
+							</div>
+						</div>
+						<div>
+							<h3 class="font-bold text-gray-800">田中商事株式会社</h3>
+							<p class="text-sm text-gray-500">発注者</p>
+						</div>
+					</div>
+				</div>
 
-            <!-- Proposal 2 -->
-            <div class="kawaii-card p-6">
-                <div class="flex flex-col lg:flex-row gap-6">
-                    <!-- Creator Info -->
-                    <div class="flex-shrink-0">
-                        <div class="flex items-center gap-4 mb-4">
-                            <div class="avatar">
-                                <div class="w-16 rounded-full">
-                                    <img src="https://daisyui.com/images/stock/photo-1535713875002-d1d0cf377fde.jpg" alt="クリエイター" />
-                                </div>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-bold text-gray-800">田中 太郎</h3>
-                                <div class="flex items-center gap-2">
-                                    <div class="flex items-center">
-                                        <span class="text-yellow-400">⭐⭐⭐⭐</span>
-                                        <span class="text-sm text-gray-600 ml-1">(4.5)</span>
-                                    </div>
-                                    <span class="text-sm text-gray-500">•</span>
-                                    <span class="text-sm text-gray-600">大阪府</span>
-                                </div>
-                                <p class="text-sm text-gray-600">実績: 89件</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Proposal Content -->
-                    <div class="flex-1">
-                        <div class="mb-4">
-                            <h4 class="font-bold text-gray-800 mb-2">提案内容</h4>
-                            <p class="text-gray-700 text-sm leading-relaxed">
-                                フリーランスとして5年間のWeb制作経験があります。特にWordPressを使用した
-                                サイト構築が得意で、管理しやすいCMSの構築を心がけています。
-                                デザインはクリーンで見やすいものを提案し、SEO対策も標準で対応いたします。
-                            </p>
-                        </div>
-                        
-                        <!-- Skills -->
-                        <div class="mb-4">
-                            <h5 class="font-medium text-gray-800 mb-2">保有スキル</h5>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="badge-kawaii bg-green-100 text-green-800">WordPress</span>
-                                <span class="badge-kawaii bg-blue-100 text-blue-800">PHP</span>
-                                <span class="badge-kawaii bg-purple-100 text-purple-800">デザイン</span>
-                                <span class="badge-kawaii bg-orange-100 text-orange-800">SEO</span>
-                            </div>
-                        </div>
-                        
-                        <!-- Price and Timeline -->
-                        <div class="grid md:grid-cols-3 gap-4 mb-4">
-                            <div>
-                                <h5 class="font-medium text-gray-800 mb-1">提案価格</h5>
-                                <p class="text-xl font-bold text-gray-800">¥580,000</p>
-                            </div>
-                            <div>
-                                <h5 class="font-medium text-gray-800 mb-1">納期</h5>
-                                <p class="text-gray-700">8月28日</p>
-                            </div>
-                            <div>
-                                <h5 class="font-medium text-gray-800 mb-1">対応時間</h5>
-                                <p class="text-gray-700">平日10:00-19:00</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Portfolio -->
-                        <div class="mb-4">
-                            <h5 class="font-medium text-gray-800 mb-2">関連実績</h5>
-                            <div class="grid grid-cols-3 gap-2">
-                                <img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="実績1" class="w-full h-16 object-cover rounded-lg">
-                                <img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="実績2" class="w-full h-16 object-cover rounded-lg">
-                                <img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="実績3" class="w-full h-16 object-cover rounded-lg">
-                            </div>
-                        </div>
-                        
-                        <!-- Actions -->
-                        <div class="flex flex-col sm:flex-row gap-3">
-                            <button class="btn-kawaii btn-primary-kawaii" onclick="selectProposal(2)">
-                                この提案を選定する
-                            </button>
-                            <button class="btn-kawaii btn-outline-kawaii" onclick="viewDetail(2)">
-                                詳細を見る
-                            </button>
-                            <button class="btn-kawaii btn-outline-kawaii" onclick="sendMessage(2)">
-                                メッセージを送る
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+				<!-- Navigation -->
+				<nav class="space-y-2">
+					<a
+						href="dashboard-client.html"
+						class="sidebar-item-kawaii flex items-center gap-3"
+					>
+						<svg
+							class="heroicon"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+							/>
+						</svg>
+						<span class="font-medium">ダッシュボード</span>
+					</a>
+					<a
+						href="create-project.html"
+						class="sidebar-item-kawaii flex items-center gap-3"
+					>
+						<svg
+							class="heroicon"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M12 4.5v15m7.5-7.5h-15"
+							/>
+						</svg>
+						<span class="font-medium">新規発注</span>
+					</a>
+					<a href="#" class="sidebar-item-kawaii flex items-center gap-3">
+						<svg
+							class="heroicon"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z"
+							/>
+						</svg>
+						<span class="font-medium">案件管理</span>
+					</a>
+					<a
+						href="#"
+						class="sidebar-item-kawaii active flex items-center gap-3"
+					>
+						<svg
+							class="heroicon"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
+							/>
+						</svg>
+						<span class="font-medium">提案一覧</span>
+					</a>
+					<a
+						href="chat.html"
+						class="sidebar-item-kawaii flex items-center gap-3"
+					>
+						<svg
+							class="heroicon"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"
+							/>
+						</svg>
+						<span class="font-medium">メッセージ</span>
+					</a>
+					<a
+						href="payment.html"
+						class="sidebar-item-kawaii flex items-center gap-3"
+					>
+						<svg
+							class="heroicon"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"
+							/>
+						</svg>
+						<span class="font-medium">支払い管理</span>
+					</a>
+				</nav>
+			</div>
+		</aside>
 
-            <!-- Proposal 3 -->
-            <div class="kawaii-card p-6">
-                <div class="flex flex-col lg:flex-row gap-6">
-                    <!-- Creator Info -->
-                    <div class="flex-shrink-0">
-                        <div class="flex items-center gap-4 mb-4">
-                            <div class="avatar">
-                                <div class="w-16 rounded-full">
-                                    <img src="https://daisyui.com/images/stock/photo-1494790108755-2616b332c633.jpg" alt="クリエイター" />
-                                </div>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-bold text-gray-800">デザインラボ合同会社</h3>
-                                <div class="flex items-center gap-2">
-                                    <div class="flex items-center">
-                                        <span class="text-yellow-400">⭐⭐⭐⭐⭐</span>
-                                        <span class="text-sm text-gray-600 ml-1">(4.9)</span>
-                                    </div>
-                                    <span class="text-sm text-gray-500">•</span>
-                                    <span class="text-sm text-gray-600">愛知県</span>
-                                </div>
-                                <p class="text-sm text-gray-600">実績: 201件</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Proposal Content -->
-                    <div class="flex-1">
-                        <div class="mb-4">
-                            <h4 class="font-bold text-gray-800 mb-2">提案内容</h4>
-                            <p class="text-gray-700 text-sm leading-relaxed">
-                                デザインとUXを重視したWeb制作を得意としています。最新のWebトレンドを取り入れた
-                                魅力的なサイトデザインを提案いたします。Vue.jsを使用したインタラクティブな
-                                要素の実装や、アクセシビリティにも配慮した開発を行います。
-                            </p>
-                        </div>
-                        
-                        <!-- Skills -->
-                        <div class="mb-4">
-                            <h5 class="font-medium text-gray-800 mb-2">保有スキル</h5>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="badge-kawaii bg-green-100 text-green-800">Vue.js</span>
-                                <span class="badge-kawaii bg-purple-100 text-purple-800">UI/UXデザイン</span>
-                                <span class="badge-kawaii bg-blue-100 text-blue-800">Figma</span>
-                                <span class="badge-kawaii bg-orange-100 text-orange-800">アクセシビリティ</span>
-                            </div>
-                        </div>
-                        
-                        <!-- Price and Timeline -->
-                        <div class="grid md:grid-cols-3 gap-4 mb-4">
-                            <div>
-                                <h5 class="font-medium text-gray-800 mb-1">提案価格</h5>
-                                <p class="text-xl font-bold text-gray-800">¥950,000</p>
-                            </div>
-                            <div>
-                                <h5 class="font-medium text-gray-800 mb-1">納期</h5>
-                                <p class="text-gray-700">8月20日</p>
-                            </div>
-                            <div>
-                                <h5 class="font-medium text-gray-800 mb-1">対応時間</h5>
-                                <p class="text-gray-700">平日9:00-17:00</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Portfolio -->
-                        <div class="mb-4">
-                            <h5 class="font-medium text-gray-800 mb-2">関連実績</h5>
-                            <div class="grid grid-cols-3 gap-2">
-                                <img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="実績1" class="w-full h-16 object-cover rounded-lg">
-                                <img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="実績2" class="w-full h-16 object-cover rounded-lg">
-                                <img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="実績3" class="w-full h-16 object-cover rounded-lg">
-                            </div>
-                        </div>
-                        
-                        <!-- Actions -->
-                        <div class="flex flex-col sm:flex-row gap-3">
-                            <button class="btn-kawaii btn-primary-kawaii" onclick="selectProposal(3)">
-                                この提案を選定する
-                            </button>
-                            <button class="btn-kawaii btn-outline-kawaii" onclick="viewDetail(3)">
-                                詳細を見る
-                            </button>
-                            <button class="btn-kawaii btn-outline-kawaii" onclick="sendMessage(3)">
-                                メッセージを送る
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+		<!-- Overlay for mobile -->
+		<div
+			id="sidebar-overlay"
+			class="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden hidden"
+		></div>
 
-        <!-- Load More -->
-        <div class="text-center mt-8">
-            <button class="btn-kawaii btn-outline-kawaii">
-                さらに読み込む (残り9件)
-            </button>
-        </div>
-    </main>
+		<!-- Main Content -->
+		<main class="main-content-kawaii lg:ml-80 pt-20">
+			<!-- Project Overview -->
+			<div class="mb-8">
+				<div class="kawaii-card p-6">
+					<div class="flex items-center justify-between mb-4">
+						<h2 class="text-xl font-bold text-gray-800">
+							コーポレートサイトのリニューアル
+						</h2>
+						<span class="badge-kawaii bg-green-100 text-green-800">募集中</span>
+					</div>
+					<div class="grid md:grid-cols-4 gap-4 text-sm">
+						<div>
+							<span class="text-gray-500">予算:</span>
+							<span class="font-medium ml-2">¥500,000 - ¥1,000,000</span>
+						</div>
+						<div>
+							<span class="text-gray-500">納期:</span>
+							<span class="font-medium ml-2">2024年8月31日</span>
+						</div>
+						<div>
+							<span class="text-gray-500">応募数:</span>
+							<span class="font-medium ml-2">12件</span>
+						</div>
+						<div>
+							<span class="text-gray-500">期限:</span>
+							<span class="font-medium ml-2">3日後</span>
+						</div>
+					</div>
+				</div>
+			</div>
 
-    <script>
-        // Mobile sidebar toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.getElementById('sidebar-overlay');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('open');
-            overlay.classList.toggle('hidden');
-        });
-        
-        overlay.addEventListener('click', () => {
-            sidebar.classList.remove('open');
-            overlay.classList.add('hidden');
-        });
+			<!-- Filter and Sort -->
+			<div class="mb-6">
+				<div class="kawaii-card p-4">
+					<div
+						class="flex flex-col sm:flex-row gap-4 items-center justify-between"
+					>
+						<div class="flex flex-col sm:flex-row gap-4">
+							<!-- Filter by Rating -->
+							<select class="form-input-kawaii">
+								<option value="">評価で絞り込み</option>
+								<option value="5">⭐⭐⭐⭐⭐</option>
+								<option value="4">⭐⭐⭐⭐ 以上</option>
+								<option value="3">⭐⭐⭐ 以上</option>
+							</select>
 
-        // Proposal selection
-        function selectProposal(id) {
-            if (confirm('この提案を選定しますか？選定後は他の提案者にお断りの連絡が送信されます。')) {
-                alert(`提案ID: ${id} を選定しました。契約手続きに進みます。`);
-                // Redirect to contract page (demo)
-                window.location.href = 'payment.html';
-            }
-        }
+							<!-- Filter by Price -->
+							<select class="form-input-kawaii">
+								<option value="">価格で絞り込み</option>
+								<option value="low">価格が安い順</option>
+								<option value="high">価格が高い順</option>
+								<option value="budget">予算内</option>
+							</select>
 
-        // View proposal detail
-        function viewDetail(id) {
-            alert(`提案ID: ${id} の詳細を表示します（デモ）`);
-        }
+							<!-- Filter by Skills -->
+							<select class="form-input-kawaii">
+								<option value="">スキルで絞り込み</option>
+								<option value="react">React</option>
+								<option value="vue">Vue.js</option>
+								<option value="wordpress">WordPress</option>
+								<option value="design">UI/UXデザイン</option>
+							</select>
+						</div>
 
-        // Send message to creator
-        function sendMessage(id) {
-            alert(`提案者ID: ${id} にメッセージを送信します（デモ）`);
-            // Redirect to chat (demo)
-            window.location.href = 'chat.html';
-        }
+						<div class="flex items-center gap-2 text-sm text-gray-600">
+							<span>12件の提案</span>
+						</div>
+					</div>
+				</div>
+			</div>
 
-        // Filter functionality
-        const filterSelects = document.querySelectorAll('select');
-        filterSelects.forEach(select => {
-            select.addEventListener('change', (e) => {
-                console.log('Filter applied:', e.target.value);
-                // Demo filter functionality
-            });
-        });
-    </script>
-</body>
+			<!-- Proposals List -->
+			<div class="space-y-6">
+				<!-- Proposal 1 -->
+				<div class="kawaii-card p-6">
+					<div class="flex flex-col lg:flex-row gap-6">
+						<!-- Creator Info -->
+						<div class="flex-shrink-0">
+							<div class="flex items-center gap-4 mb-4">
+								<div class="avatar">
+									<div class="w-16 rounded-full">
+										<img
+											src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+											alt="クリエイター"
+										/>
+									</div>
+								</div>
+								<div>
+									<h3 class="text-lg font-bold text-gray-800">
+										株式会社WebStudio
+									</h3>
+									<div class="flex items-center gap-2">
+										<div class="flex items-center">
+											<span class="text-yellow-400">⭐⭐⭐⭐⭐</span>
+											<span class="text-sm text-gray-600 ml-1">(4.8)</span>
+										</div>
+										<span class="text-sm text-gray-500">•</span>
+										<span class="text-sm text-gray-600">東京都</span>
+									</div>
+									<p class="text-sm text-gray-600">実績: 127件</p>
+								</div>
+							</div>
+						</div>
+
+						<!-- Proposal Content -->
+						<div class="flex-1">
+							<div class="mb-4">
+								<h4 class="font-bold text-gray-800 mb-2">提案内容</h4>
+								<p class="text-gray-700 text-sm leading-relaxed">
+									貴社のコーポレートサイトリニューアルについて、弊社で対応させていただければと思います。
+									React.jsを使用したモダンなWebサイトの構築が得意で、SEO対策やレスポンシブデザインにも
+									対応いたします。デザインからコーディング、CMS構築まで一貫してサポートいたします。
+								</p>
+							</div>
+
+							<!-- Skills -->
+							<div class="mb-4">
+								<h5 class="font-medium text-gray-800 mb-2">保有スキル</h5>
+								<div class="flex flex-wrap gap-2">
+									<span class="badge-kawaii bg-blue-100 text-blue-800"
+										>React</span
+									>
+									<span class="badge-kawaii bg-green-100 text-green-800"
+										>WordPress</span
+									>
+									<span class="badge-kawaii bg-purple-100 text-purple-800"
+										>UI/UXデザイン</span
+									>
+									<span class="badge-kawaii bg-orange-100 text-orange-800"
+										>SEO</span
+									>
+								</div>
+							</div>
+
+							<!-- Price and Timeline -->
+							<div class="grid md:grid-cols-3 gap-4 mb-4">
+								<div>
+									<h5 class="font-medium text-gray-800 mb-1">提案価格</h5>
+									<p class="text-xl font-bold text-gray-800">¥780,000</p>
+								</div>
+								<div>
+									<h5 class="font-medium text-gray-800 mb-1">納期</h5>
+									<p class="text-gray-700">8月25日</p>
+								</div>
+								<div>
+									<h5 class="font-medium text-gray-800 mb-1">対応時間</h5>
+									<p class="text-gray-700">平日9:00-18:00</p>
+								</div>
+							</div>
+
+							<!-- Portfolio -->
+							<div class="mb-4">
+								<h5 class="font-medium text-gray-800 mb-2">関連実績</h5>
+								<div class="grid grid-cols-3 gap-2">
+									<img
+										src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+										alt="実績1"
+										class="w-full h-16 object-cover rounded-lg"
+									/>
+									<img
+										src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+										alt="実績2"
+										class="w-full h-16 object-cover rounded-lg"
+									/>
+									<img
+										src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+										alt="実績3"
+										class="w-full h-16 object-cover rounded-lg"
+									/>
+								</div>
+							</div>
+
+							<!-- Actions -->
+							<div class="flex flex-col sm:flex-row gap-3">
+								<button
+									class="btn-kawaii btn-primary-kawaii"
+									onclick="selectProposal(1)"
+								>
+									この提案を選定する
+								</button>
+								<button
+									class="btn-kawaii btn-outline-kawaii"
+									onclick="viewDetail(1)"
+								>
+									詳細を見る
+								</button>
+								<button
+									class="btn-kawaii btn-outline-kawaii"
+									onclick="sendMessage(1)"
+								>
+									メッセージを送る
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Proposal 2 -->
+				<div class="kawaii-card p-6">
+					<div class="flex flex-col lg:flex-row gap-6">
+						<!-- Creator Info -->
+						<div class="flex-shrink-0">
+							<div class="flex items-center gap-4 mb-4">
+								<div class="avatar">
+									<div class="w-16 rounded-full">
+										<img
+											src="https://daisyui.com/images/stock/photo-1535713875002-d1d0cf377fde.jpg"
+											alt="クリエイター"
+										/>
+									</div>
+								</div>
+								<div>
+									<h3 class="text-lg font-bold text-gray-800">田中 太郎</h3>
+									<div class="flex items-center gap-2">
+										<div class="flex items-center">
+											<span class="text-yellow-400">⭐⭐⭐⭐</span>
+											<span class="text-sm text-gray-600 ml-1">(4.5)</span>
+										</div>
+										<span class="text-sm text-gray-500">•</span>
+										<span class="text-sm text-gray-600">大阪府</span>
+									</div>
+									<p class="text-sm text-gray-600">実績: 89件</p>
+								</div>
+							</div>
+						</div>
+
+						<!-- Proposal Content -->
+						<div class="flex-1">
+							<div class="mb-4">
+								<h4 class="font-bold text-gray-800 mb-2">提案内容</h4>
+								<p class="text-gray-700 text-sm leading-relaxed">
+									フリーランスとして5年間のWeb制作経験があります。特にWordPressを使用した
+									サイト構築が得意で、管理しやすいCMSの構築を心がけています。
+									デザインはクリーンで見やすいものを提案し、SEO対策も標準で対応いたします。
+								</p>
+							</div>
+
+							<!-- Skills -->
+							<div class="mb-4">
+								<h5 class="font-medium text-gray-800 mb-2">保有スキル</h5>
+								<div class="flex flex-wrap gap-2">
+									<span class="badge-kawaii bg-green-100 text-green-800"
+										>WordPress</span
+									>
+									<span class="badge-kawaii bg-blue-100 text-blue-800"
+										>PHP</span
+									>
+									<span class="badge-kawaii bg-purple-100 text-purple-800"
+										>デザイン</span
+									>
+									<span class="badge-kawaii bg-orange-100 text-orange-800"
+										>SEO</span
+									>
+								</div>
+							</div>
+
+							<!-- Price and Timeline -->
+							<div class="grid md:grid-cols-3 gap-4 mb-4">
+								<div>
+									<h5 class="font-medium text-gray-800 mb-1">提案価格</h5>
+									<p class="text-xl font-bold text-gray-800">¥580,000</p>
+								</div>
+								<div>
+									<h5 class="font-medium text-gray-800 mb-1">納期</h5>
+									<p class="text-gray-700">8月28日</p>
+								</div>
+								<div>
+									<h5 class="font-medium text-gray-800 mb-1">対応時間</h5>
+									<p class="text-gray-700">平日10:00-19:00</p>
+								</div>
+							</div>
+
+							<!-- Portfolio -->
+							<div class="mb-4">
+								<h5 class="font-medium text-gray-800 mb-2">関連実績</h5>
+								<div class="grid grid-cols-3 gap-2">
+									<img
+										src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+										alt="実績1"
+										class="w-full h-16 object-cover rounded-lg"
+									/>
+									<img
+										src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+										alt="実績2"
+										class="w-full h-16 object-cover rounded-lg"
+									/>
+									<img
+										src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+										alt="実績3"
+										class="w-full h-16 object-cover rounded-lg"
+									/>
+								</div>
+							</div>
+
+							<!-- Actions -->
+							<div class="flex flex-col sm:flex-row gap-3">
+								<button
+									class="btn-kawaii btn-primary-kawaii"
+									onclick="selectProposal(2)"
+								>
+									この提案を選定する
+								</button>
+								<button
+									class="btn-kawaii btn-outline-kawaii"
+									onclick="viewDetail(2)"
+								>
+									詳細を見る
+								</button>
+								<button
+									class="btn-kawaii btn-outline-kawaii"
+									onclick="sendMessage(2)"
+								>
+									メッセージを送る
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Proposal 3 -->
+				<div class="kawaii-card p-6">
+					<div class="flex flex-col lg:flex-row gap-6">
+						<!-- Creator Info -->
+						<div class="flex-shrink-0">
+							<div class="flex items-center gap-4 mb-4">
+								<div class="avatar">
+									<div class="w-16 rounded-full">
+										<img
+											src="https://daisyui.com/images/stock/photo-1494790108755-2616b332c633.jpg"
+											alt="クリエイター"
+										/>
+									</div>
+								</div>
+								<div>
+									<h3 class="text-lg font-bold text-gray-800">
+										デザインラボ合同会社
+									</h3>
+									<div class="flex items-center gap-2">
+										<div class="flex items-center">
+											<span class="text-yellow-400">⭐⭐⭐⭐⭐</span>
+											<span class="text-sm text-gray-600 ml-1">(4.9)</span>
+										</div>
+										<span class="text-sm text-gray-500">•</span>
+										<span class="text-sm text-gray-600">愛知県</span>
+									</div>
+									<p class="text-sm text-gray-600">実績: 201件</p>
+								</div>
+							</div>
+						</div>
+
+						<!-- Proposal Content -->
+						<div class="flex-1">
+							<div class="mb-4">
+								<h4 class="font-bold text-gray-800 mb-2">提案内容</h4>
+								<p class="text-gray-700 text-sm leading-relaxed">
+									デザインとUXを重視したWeb制作を得意としています。最新のWebトレンドを取り入れた
+									魅力的なサイトデザインを提案いたします。Vue.jsを使用したインタラクティブな
+									要素の実装や、アクセシビリティにも配慮した開発を行います。
+								</p>
+							</div>
+
+							<!-- Skills -->
+							<div class="mb-4">
+								<h5 class="font-medium text-gray-800 mb-2">保有スキル</h5>
+								<div class="flex flex-wrap gap-2">
+									<span class="badge-kawaii bg-green-100 text-green-800"
+										>Vue.js</span
+									>
+									<span class="badge-kawaii bg-purple-100 text-purple-800"
+										>UI/UXデザイン</span
+									>
+									<span class="badge-kawaii bg-blue-100 text-blue-800"
+										>Figma</span
+									>
+									<span class="badge-kawaii bg-orange-100 text-orange-800"
+										>アクセシビリティ</span
+									>
+								</div>
+							</div>
+
+							<!-- Price and Timeline -->
+							<div class="grid md:grid-cols-3 gap-4 mb-4">
+								<div>
+									<h5 class="font-medium text-gray-800 mb-1">提案価格</h5>
+									<p class="text-xl font-bold text-gray-800">¥950,000</p>
+								</div>
+								<div>
+									<h5 class="font-medium text-gray-800 mb-1">納期</h5>
+									<p class="text-gray-700">8月20日</p>
+								</div>
+								<div>
+									<h5 class="font-medium text-gray-800 mb-1">対応時間</h5>
+									<p class="text-gray-700">平日9:00-17:00</p>
+								</div>
+							</div>
+
+							<!-- Portfolio -->
+							<div class="mb-4">
+								<h5 class="font-medium text-gray-800 mb-2">関連実績</h5>
+								<div class="grid grid-cols-3 gap-2">
+									<img
+										src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+										alt="実績1"
+										class="w-full h-16 object-cover rounded-lg"
+									/>
+									<img
+										src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+										alt="実績2"
+										class="w-full h-16 object-cover rounded-lg"
+									/>
+									<img
+										src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+										alt="実績3"
+										class="w-full h-16 object-cover rounded-lg"
+									/>
+								</div>
+							</div>
+
+							<!-- Actions -->
+							<div class="flex flex-col sm:flex-row gap-3">
+								<button
+									class="btn-kawaii btn-primary-kawaii"
+									onclick="selectProposal(3)"
+								>
+									この提案を選定する
+								</button>
+								<button
+									class="btn-kawaii btn-outline-kawaii"
+									onclick="viewDetail(3)"
+								>
+									詳細を見る
+								</button>
+								<button
+									class="btn-kawaii btn-outline-kawaii"
+									onclick="sendMessage(3)"
+								>
+									メッセージを送る
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Load More -->
+			<div class="text-center mt-8">
+				<button class="btn-kawaii btn-outline-kawaii">
+					さらに読み込む (残り9件)
+				</button>
+			</div>
+		</main>
+
+		<script>
+			// Mobile sidebar toggle
+			const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+			const sidebar = document.getElementById('sidebar');
+			const overlay = document.getElementById('sidebar-overlay');
+
+			mobileMenuBtn.addEventListener('click', () => {
+				sidebar.classList.toggle('open');
+				overlay.classList.toggle('hidden');
+			});
+
+			overlay.addEventListener('click', () => {
+				sidebar.classList.remove('open');
+				overlay.classList.add('hidden');
+			});
+
+			// Proposal selection
+			function selectProposal(id) {
+				if (
+					confirm(
+						'この提案を選定しますか？選定後は他の提案者にお断りの連絡が送信されます。'
+					)
+				) {
+					alert(`提案ID: ${id} を選定しました。契約手続きに進みます。`);
+					// Redirect to contract page (demo)
+					window.location.href = 'payment.html';
+				}
+			}
+
+			// View proposal detail
+			function viewDetail(id) {
+				alert(`提案ID: ${id} の詳細を表示します（デモ）`);
+			}
+
+			// Send message to creator
+			function sendMessage(id) {
+				alert(`提案者ID: ${id} にメッセージを送信します（デモ）`);
+				// Redirect to chat (demo)
+				window.location.href = 'chat.html';
+			}
+
+			// Filter functionality
+			const filterSelects = document.querySelectorAll('select');
+			filterSelects.forEach((select) => {
+				select.addEventListener('change', (e) => {
+					console.log('Filter applied:', e.target.value);
+					// Demo filter functionality
+				});
+			});
+		</script>
+	</body>
 </html>
